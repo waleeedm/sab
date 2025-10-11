@@ -1,184 +1,583 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kfuta Street Food</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kufta — Clean Street Food</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: "Poppins", sans-serif;
-      background-color: #fff;
-      color: #222;
-    }
+    /* --- Keep the original look/feel and layout mostly unchanged --- */
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: #111; }
+    .topbar { background: #fff; border-bottom: 1px solid #e6e6e6; position: sticky; top: 0; z-index: 1000; }
+    .logo-center { text-align:center; padding: 18px 10px 6px; }
+    .logo-center img { width: 150px; height: auto; display:inline-block; }
+    .hotline { color:#666; font-weight:600; margin-top:6px; font-size:14px; }
+    header, footer { background: #222; color: #fff; padding: 14px 20px; text-align: center; }
+    nav { padding: 8px 0 12px; text-align:center; background: transparent; }
+    nav a { margin: 0 10px; color: #222; text-decoration: none; font-weight: bold; padding:8px 10px; border-radius:6px; }
+    nav a:hover { text-decoration: underline; color: #e63946; }
+    section { padding: 40px 20px; max-width: 1000px; margin: auto; }
+    .hero { background: #fff; padding: 48px 20px; text-align: center; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.04); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+    .card { background: #fff; border: 1px solid #e6e6e6; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+    .map, .form { background: #fff; padding: 24px 20px; border-radius: 12px; text-align: center; border: 1px solid #e6e6e6; }
+    button { padding: 10px 20px; margin-top: 10px; border: none; border-radius: 8px; background: #e63946; color: white; cursor: pointer; font-weight:700; }
+    button:hover { background: #d62828; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #fff; }
+    table td, table th { border: 1px solid #e6e6e6; padding: 10px; text-align: center; }
+    input[type='number'] { width: 60px; padding:6px; border-radius:6px; border:1px solid #ccc; }
+    input[type='text'], input[type='tel'], input[type='email'], select, textarea { width: 100%; padding:10px; border-radius:6px; border:1px solid #ddd; font-size:14px; }
+    textarea { min-height:80px; resize:vertical; }
+    .muted { color:#777; font-size:0.95rem; }
+    .menu-item-img { width:100%; height:160px; object-fit:cover; border-radius:8px; display:block; }
+    .item-block { text-align:left; padding:12px; }
+    .item-footer { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:10px; }
+    .price { font-weight:800; color:#e63946; }
+    .small { font-size:0.85rem; color:#666; }
 
-    header {
-      background: linear-gradient(90deg, #fbbf24, #ef4444);
-      color: #fff;
-      text-align: center;
-      padding: 80px 20px;
-    }
-    header h1 {
-      font-size: 3rem;
-      letter-spacing: 2px;
-    }
-    header p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-      margin-top: 10px;
-    }
-    header a {
-      display: inline-block;
-      background-color: #fff;
-      color: #ef4444;
-      padding: 12px 28px;
-      border-radius: 50px;
-      font-weight: bold;
-      margin-top: 25px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-    header a:hover {
-      background-color: #222;
-      color: #fff;
-    }
+    /* cart/checkout right column layout inside order section */
+    .order-layout { display:grid; grid-template-columns: 1fr 360px; gap:20px; align-items:start; }
+    .cart-panel { position: sticky; top: 88px; background:#fff; padding:16px; border-radius:10px; border:1px solid #e6e6e6; box-shadow: 0 6px 18px rgba(0,0,0,0.03); }
+    .cart-item { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px dashed #eee; align-items:center; }
+    .cart-item .meta { text-align:left; }
+    .cart-total { margin-top:12px; display:flex; justify-content:space-between; align-items:center; font-weight:800; font-size:1.05rem; }
 
-    nav {
-      background-color: #222;
-      text-align: center;
-      padding: 15px 0;
-    }
-    nav a {
-      color: #fbbf24;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: 500;
-    }
-    nav a:hover {
-      color: #ef4444;
-    }
+    /* promotions / footer social icons */
+    .promo-grid{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+    .socials { display:flex; gap:12px; justify-content:center; margin-top:8px; }
+    .socials a { color:white; display:inline-block; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.06); line-height:36px; text-align:center; }
+    .socials a svg { vertical-align:middle; fill:white; width:18px; height:18px; }
 
-    section {
-      max-width: 1000px;
-      margin: 60px auto;
-      padding: 0 20px;
-    }
-    section h2 {
-      color: #ef4444;
-      border-bottom: 2px solid #fbbf24;
-      display: inline-block;
-      margin-bottom: 15px;
-    }
-    section p {
-      line-height: 1.6;
-      margin-top: 10px;
-    }
-
-    .menu {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      margin-top: 25px;
-    }
-    .menu-item {
-      border: 1px solid #eee;
-      border-radius: 10px;
-      padding: 20px;
-      text-align: center;
-      transition: 0.3s;
-    }
-    .menu-item:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-    .menu-item img {
-      width: 100%;
-      border-radius: 10px;
-    }
-    .menu-item h3 {
-      margin: 10px 0 5px;
-      color: #ef4444;
-    }
-    .menu-item p {
-      color: #555;
-      font-size: 0.95rem;
-    }
-
-    footer {
-      background-color: #222;
-      color: #fbbf24;
-      text-align: center;
-      padding: 25px 10px;
-      font-size: 0.9rem;
+    /* responsive */
+    @media (max-width:980px) {
+      .order-layout { grid-template-columns: 1fr; }
+      .cart-panel { position:relative; top:auto; }
+      nav { display:flex; gap:8px; overflow:auto; padding:12px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>KFUTA</h1>
-    <p>Clean Street Food • Kofta • Hawawshi • Grill Vibes</p>
-    <a href="#menu">View Our Menu</a>
-  </header>
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="#menu">Menu</a>
-    <a href="#branches">Branches</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <!-- Top area: logo centered above nav -->
+  <div class="topbar">
+    <div class="logo-center">
+      <!-- Put your real logo file here named logo.jpg in same folder -->
+      <img src="logo.jpg" alt="Kufta logo" id="brand-logo">
+      <div class="hotline">Hotline: <strong>15544</strong></div>
+    </div>
 
-  <section id="about">
-    <h2>About Kfuta</h2>
-    <p>
-      KFUTA brings the taste of Egyptian street food to a whole new level — clean, fast, and full of flavor. 
-      With over 20 branches across Cairo, Giza, and the North Coast, we’re serving authentic kofta and hawawshi that Gen Z loves.
-    </p>
+    <nav aria-label="Main navigation">
+      <a href="#home" onclick="scrollTo('home')">Home</a>
+      <a href="#menu" onclick="scrollTo('menu')">Menu</a>
+      <a href="#branches" onclick="scrollTo('branches')">Branches</a>
+      <a href="#order" onclick="scrollTo('order')">Order</a>
+      <a href="#promotions" onclick="scrollTo('promotions')">Promotions</a>
+      <a href="#franchise" onclick="scrollTo('franchise')">Franchise</a>
+      <a href="#careers" onclick="scrollTo('careers')">Careers</a>
+      <a href="#feedback" onclick="scrollTo('feedback')">Feedback</a>
+      <a href="#contact" onclick="scrollTo('contact')">Contact</a>
+    </nav>
+  </div>
+
+  <!-- HOME -->
+  <section id="home">
+    <div class="hero">
+      <h2 style="margin:0 0 10px">Clean Street Food for Gen Z</h2>
+      <p class="muted" style="margin:0 0 18px">Kufta — fresh kofta, hawawshi and more. Order online or visit our branches.</p>
+      <div>
+        <button onclick="scrollTo('menu')">View Menu</button>
+        <button onclick="scrollTo('order')">Order Now</button>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:18px;">
+      <div class="card">🍔 Kofta Sandwich <br><strong class="price">60 EGP</strong><br><button onclick="addToCartFromMenu('Kufta',60)">Add</button></div>
+      <div class="card">🥙 Hawawshi <br><strong class="price">55 EGP</strong><br><button onclick="addToCartFromMenu('Hawawshi',55)">Add</button></div>
+      <div class="card">🍟 Meal Combo <br><strong class="price">85 EGP</strong><br><button onclick="addToCartFromMenu('Kufta Combo',85)">Add</button></div>
+    </div>
   </section>
 
+  <!-- MENU -->
   <section id="menu">
     <h2>Our Menu</h2>
-    <div class="menu">
-      <div class="menu-item">
-        <img src="https://via.placeholder.com/250x150?text=Kofta+Wrap" alt="Kofta Wrap">
-        <h3>Kofta Wrap</h3>
-        <p>Juicy grilled kofta with signature spices and sauces.</p>
+    <div class="grid" id="menu-grid">
+      <!-- We'll inject full menu items here from inline data via JS for clarity -->
+    </div>
+  </section>
+
+  <!-- BRANCHES + MAP -->
+  <section id="branches">
+    <h2>Our Branches</h2>
+
+    <div class="map" style="margin-bottom:18px;">
+      <!-- Embedded Google Map centered on Downtown (Talaat Harb / Cairo) -->
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d13431.6178270223!2d31.235712!3d30.044420!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1696599999999"
+        width="100%" height="360" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+    <div class="grid" id="branches-grid">
+      <!-- Branch cards injected by JS (real list from survey app) -->
+    </div>
+  </section>
+
+  <!-- ORDER -->
+  <section id="order">
+    <h2>Order Now</h2>
+
+    <div class="order-layout">
+      <!-- LEFT: Checkout form -->
+      <div>
+        <div class="form">
+          <p class="muted">Fill your details and place the order. Use a promo code for discounts.</p>
+
+          <form id="checkout-form" onsubmit="return placeOrder(event)">
+            <label>Choose Branch</label>
+            <select id="select-branch" required></select>
+
+            <label>Full Name</label>
+            <input id="cust-name" type="text" required>
+
+            <label>Phone</label>
+            <input id="cust-phone" type="tel" required>
+
+            <label>Delivery Address</label>
+            <textarea id="cust-address" required></textarea>
+
+            <label>Promo Code (optional)</label>
+            <div style="display:flex;gap:8px;">
+              <input id="promo-code" type="text" placeholder="Enter promo code">
+              <button type="button" onclick="applyPromo()">Apply</button>
+            </div>
+            <div id="promo-msg" class="small" style="margin-top:8px;color:#e63946"></div>
+
+            <table aria-label="order summary">
+              <thead>
+                <tr><th>Item</th><th>Qty</th><th>Price</th></tr>
+              </thead>
+              <tbody id="order-summary">
+                <tr><td colspan="3" class="small muted">Your cart is empty</td></tr>
+              </tbody>
+            </table>
+
+            <div style="margin-top:12px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div class="small muted">Subtotal</div><div id="subtotal">0 EGP</div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+                <div class="small muted">Discount</div><div id="discount">0 EGP</div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;font-weight:800;">
+                <div>Total</div><div id="total">0 EGP</div>
+              </div>
+            </div>
+
+            <div style="margin-top:14px;">
+              <button type="submit">Submit Order</button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="menu-item">
-        <img src="https://via.placeholder.com/250x150?text=Hawawshi" alt="Hawawshi">
-        <h3>Hawawshi</h3>
-        <p>Classic Egyptian hawawshi baked with a clean twist.</p>
-      </div>
-      <div class="menu-item">
-        <img src="https://via.placeholder.com/250x150?text=Kfuta+Box" alt="Kfuta Box">
-        <h3>Kfuta Box</h3>
-        <p>Street food, redefined — mix your favorites in one box.</p>
+
+      <!-- RIGHT: Cart panel -->
+      <aside class="cart-panel">
+        <h3>Your Cart</h3>
+        <div id="cart-items" style="min-height:80px;">
+          <div class="muted small">Cart is empty</div>
+        </div>
+        <div class="cart-total" style="margin-top:10px">
+          <div class="muted">Subtotal</div>
+          <div id="cart-subtotal">0 EGP</div>
+        </div>
+        <div style="margin-top:12px"><button onclick="scrollTo('order')">Checkout</button></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PROMOTIONS -->
+  <section id="promotions">
+    <h2>Promotions</h2>
+    <div class="grid promo-grid">
+      <div class="card">🔥 PROMO: PROMO10 — 10% OFF orders over 200 EGP</div>
+      <div class="card">🍟 PROMO: FREEFRIES — Free Fries on orders with a sandwich</div>
+      <div class="card">🎁 PROMO: SAVE20 — 20% OFF (select branches only)</div>
+    </div>
+  </section>
+
+  <!-- FRANCHISE -->
+  <section id="franchise">
+    <h2>Franchise Opportunities</h2>
+    <div class="form">
+      <p class="muted">Interested in joining the Kufta family? Use the contact form below (select Franchise).</p>
+      <button onclick="scrollTo('contact')">Go to Contact Form</button>
+    </div>
+  </section>
+
+  <!-- CAREERS -->
+  <section id="careers">
+    <h2>Careers</h2>
+    <div class="form">
+      <p class="muted">Join our team — use the contact form below (select Careers).</p>
+      <button onclick="scrollTo('contact')">Go to Contact Form</button>
+    </div>
+  </section>
+
+  <!-- FEEDBACK -->
+  <section id="feedback">
+    <h2>Your Feedback Matters</h2>
+    <div class="form">
+      <form id="feedback-form" onsubmit="return submitFeedback(event)">
+        <label>Name</label>
+        <input id="fb-name" type="text">
+        <label>Branch</label>
+        <select id="fb-branch"></select>
+        <label>Comments</label>
+        <textarea id="fb-text" required></textarea>
+        <div style="margin-top:10px"><button type="submit">Submit Feedback</button></div>
+      </form>
+      <div style="margin-top:10px">
+        <button onclick="openWhatsApp()">Send via WhatsApp</button>
       </div>
     </div>
   </section>
 
-  <section id="branches">
-    <h2>Our Branches</h2>
-    <p>
-      📍 Cairo • Giza • North Coast<br>
-      More branches coming soon — follow us on Instagram @KfutaOfficial
-    </p>
-  </section>
-
+  <!-- CONTACT (Unified for Contact / Franchise / Careers) -->
   <section id="contact">
-    <h2>Contact Us</h2>
-    <p>
-      📞 Hotline: 19999<br>
-      💬 WhatsApp: +20 100 000 0000<br>
-      📧 info@kfuta.com
-    </p>
+    <h2>Contact / Franchise / Careers</h2>
+    <div class="form">
+      <form id="contact-form" onsubmit="return submitContact(event)">
+        <label>Reason</label>
+        <select id="contact-reason" required>
+          <option>General Inquiry</option>
+          <option>Franchise Request</option>
+          <option>Career Opportunity</option>
+        </select>
+        <label>Full Name</label>
+        <input id="contact-name" type="text" required>
+        <label>Email</label>
+        <input id="contact-email" type="email" required>
+        <label>Phone</label>
+        <input id="contact-phone" type="tel">
+        <label>Message</label>
+        <textarea id="contact-message" required></textarea>
+        <div style="margin-top:12px"><button type="submit">Send Message</button></div>
+      </form>
+    </div>
   </section>
 
   <footer>
-    © 2025 KFUTA Street Food. All Rights Reserved.
+    <div>Kufta – Hotline: <strong>15544</strong></div>
+    <div class="socials" style="margin-top:10px">
+      <!-- placeholder links; replace with actual social URLs -->
+      <a href="#" title="Instagram" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.3 2.4.5.6.3 1 .6 1.5 1.1s.8 1 1.1 1.5c.2.5.4 1.2.5 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.9-.5 2.4-.3.6-.6 1-1.1 1.5s-1 0-1.5 1.1c-.5.2-1.2.4-2.4.5-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.3-2.4-.5-.6-.3-1-.6-1.5-1.1S2.6 20 2.3 19.4c-.2-.5-.4-1.2-.5-2.4C1.6 15.7 1.6 15.3 1.6 12s0-3.6.1-4.9c.1-1.2.3-1.9.5-2.4.3-.6.6-1 1.1-1.5S5 2.9 5.5 2.6C6 .2 6.7 2.2 12 2.2zm0 2.3c-3.1 0-3.5 0-4.7.1-1 .1-1.6.2-2 .4-.5.2-.8.5-1.1.9-.3.3-.7.6-1 1-.2.4-.3 1-.4 2-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c.1 1 .2 1.6.4 2 .2.5.5.8.9 1.1.3.3.6.7 1 1 .4.2 1 .3 2 .4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1-.1 1.6-.2 2-.4.5-.2.8-.5 1.1-.9.3-.3.7-.6 1-1 .2-.4.3-1 .4-2 .1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-1-.2-1.6-.4-2-.2-.5-.5-.8-.9-1.1-.3-.3-.6-.7-1-1-.4-.2-1-.3-2-.4-1.2-.1-1.6-.1-4.7-.1z"/></svg>
+      </a>
+      <a href="#" title="Facebook" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M22 12.1C22 6.6 17.5 2 12 2S2 6.6 2 12.1c0 5 3.7 9.2 8.5 9.9v-7H8.1v-2.9h2.4V9.2c0-2.4 1.4-3.8 3.6-3.8 1 0 2 .2 2 .2v2.2h-1.1c-1.1 0-1.4.7-1.4 1.4v1.7h2.5l-.4 2.9h-2.1v7C18.3 21.3 22 17.1 22 12.1z"/></svg>
+      </a>
+      <a href="#" title="WhatsApp" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M20.5 3.5C18.9 2 16.8 1 14.5 1 8.8 1 4 5.8 4 11.5c0 1.9.5 3.8 1.5 5.4L4 23l6.2-1.6c1.5.8 3.1 1.3 4.8 1.3 5.7 0 10.5-4.8 10.5-10.5 0-2.3-1-4.4-2.9-6zM12 20c-1.3 0-2.6-.3-3.8-.9l-.3-.2-3.7.9.9-3.6-.2-.4C5.1 13.6 4.5 12.1 4.5 10.6 4.5 6.3 8.2 2.7 12.5 2.7 16.7 2.7 20.5 6.3 20.5 10.6 20.5 14.9 16.8 18.6 12.5 18.6 12.3 18.6 12.1 18.6 12 18.6z"/></svg>
+      </a>
+    </div>
+    <div style="margin-top:10px" class="small muted">Follow us — links are placeholders and can be updated later</div>
   </footer>
+
+<script>
+/* ---------- Data: menu items and branches (from provided menu image) ---------- */
+const MENU = [
+  {category:'Sandwiches', name:'Kufta', price:60, desc:'Classic grilled kofta sandwich'},
+  {category:'Sandwiches', name:'Hawawshi', price:55, desc:'Traditional Egyptian spiced meat hawawshi'},
+  {category:'Sandwiches', name:'Kufta Double', price:105, desc:'Double portion of kofta'},
+  {category:'Sandwiches', name:'3 Sandwiches Box', price:170, desc:'Your choice from Kufta / Hawawshi'},
+  {category:'Sandwiches', name:'4 Sandwiches Box', price:225, desc:'Your choice from Kufta / Hawawshi'},
+  {category:'Sandwiches', name:'8 Sandwiches Box', price:450, desc:'Your choice from Kufta / Hawawshi'},
+  {category:'Sandwiches', name:'10 Sandwiches Box', price:560, desc:'Your choice from Kufta / Hawawshi'},
+
+  {category:'Sides', name:'Whiskey (Salad Drink)', price:15, desc:'Tangy salad drink'},
+  {category:'Sides', name:'Mixed Pickles / Cucumber', price:10, desc:'House pickled mix'},
+  {category:'Sides', name:'Pickled Tomatoes', price:15, desc:'Homemade pickled tomatoes'},
+  {category:'Sides', name:'Egyptian Salad', price:15, desc:'Fresh baladi salad'},
+  {category:'Sides', name:'Tahini', price:15, desc:'Classic tahini dip'},
+  {category:'Sides', name:'Spicy Tahini', price:15, desc:'Tahini with a spicy twist'},
+  {category:'Sides', name:'Potato Chips', price:15, desc:'Freshly fried chips'},
+
+  {category:'Drinks', name:'Rayeb Lemon & Blueberry', price:25, desc:'Refreshing drink'},
+  {category:'Drinks', name:'Tabasko (Fruity & Spicy)', price:25, desc:'Fruity spicy juice'},
+  {category:'Drinks', name:'V7', price:25, desc:'Carbonated energy drink'},
+  {category:'Drinks', name:'Mineral Water', price:15, desc:'Bottled water'}
+];
+
+const BRANCHES = [
+  {name:'Downtown (Talaat Harb)', addr:'Talaat Harb St, Downtown Cairo', hours:'10:00 - 02:00', phone:'15544', mapLink:'#'},
+  {name:'Zamalek', addr:'Street 123, Zamalek, Cairo', hours:'10:00 - 02:00', phone:'15544', mapLink:'#'},
+  {name:'Dokki', addr:'45 Dokki Rd, Giza', hours:'10:00 - 01:00', phone:'15544', mapLink:'#'},
+  {name:'North Coast (Marina)', addr:'Marina Gate 5, North Coast', hours:'Seasonal hours', phone:'15544', mapLink:'#'},
+  {name:'Nasr City', addr:'Central Plaza, Nasr City', hours:'11:00 - 00:00', phone:'15544', mapLink:'#'},
+  {name:'Heliopolis', addr:'Heliopolis Main St', hours:'11:00 - 00:00', phone:'15544', mapLink:'#'},
+  {name:'Maadi', addr:'Maadi Corniche', hours:'10:00 - 01:00', phone:'15544', mapLink:'#'}
+];
+
+/* ---------- Promo codes and logic ----------
+   PROMO10 => 10% off orders >= 200
+   SAVE20 => 20% off orders >= 500
+   FREEFRIES => Adds a free fries if cart contains at least one sandwich
+*/
+const PROMOS = {
+  'PROMO10': {type:'percent', amount:10, min:200, note:'10% off orders over 200 EGP'},
+  'SAVE20': {type:'percent', amount:20, min:500, note:'20% off orders over 500 EGP'},
+  'FREEFRIES': {type:'freeitem', item:'Potato Chips', min:0, note:'Free fries (one) with any sandwich'}
+};
+
+/* ---------- Cart state ---------- */
+let cart = []; // {name, price, qty}
+
+/* ---------- Render menu into #menu-grid ---------- */
+function renderMenu(){
+  const grid = document.getElementById('menu-grid');
+  grid.innerHTML = '';
+  MENU.forEach((it, idx) => {
+    const col = document.createElement('div');
+    col.className = 'item card';
+    // use unsplash placeholders by category for images (kept generic)
+    const imgUrl = chooseImageForItem(it);
+    col.innerHTML = `
+      <img src="${imgUrl}" alt="${escapeHtml(it.name)}" class="menu-item-img">
+      <div class="item-block">
+        <h3>${escapeHtml(it.name)}</h3>
+        <p class="small">${escapeHtml(it.desc)}</p>
+        <div class="item-footer">
+          <div class="price">${it.price} EGP</div>
+          <div><button onclick="addToCart(${idx})">Add</button></div>
+        </div>
+      </div>`;
+    grid.appendChild(col);
+  });
+}
+
+/* helper to choose placeholder images */
+function chooseImageForItem(it){
+  const n = it.name.toLowerCase();
+  if(n.includes('kufta') || n.includes('hawawshi') || n.includes('sandwich')) return 'https://images.unsplash.com/photo-1601050690597-1f38f1f83a07?auto=format&fit=crop&w=800&q=60';
+  if(n.includes('fries') || n.includes('chips') ) return 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=60';
+  if(n.includes('drink') || n.includes('rayeb') || n.includes('v7') || n.includes('tabasko')) return 'https://images.unsplash.com/photo-1542444459-db4d4b3d1b2b?auto=format&fit=crop&w=800&q=60';
+  if(n.includes('dessert') || n.includes('cup')) return 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=60';
+  return 'https://images.unsplash.com/photo-1606732803863-24b3f2d4ef7c?auto=format&fit=crop&w=800&q=60';
+}
+
+/* ---------- Render branches and populate branch selects ---------- */
+function renderBranches(){
+  const container = document.getElementById('branches-grid');
+  container.innerHTML = '';
+  const select = document.getElementById('select-branch');
+  const fbSelect = document.getElementById('fb-branch');
+  select.innerHTML = '';
+  fbSelect.innerHTML = '';
+  BRANCHES.forEach(b=>{
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `<h3>${escapeHtml(b.name)}</h3>
+      <div class="small">${escapeHtml(b.addr)}<br>Hours: ${escapeHtml(b.hours)}<br>Hotline: ${escapeHtml(b.phone)}</div>
+      <div style="margin-top:8px"><button onclick="openMap('${b.name}')">View on Google Maps</button></div>`;
+    container.appendChild(card);
+
+    const opt = document.createElement('option'); opt.value = b.name; opt.textContent = b.name; select.appendChild(opt);
+    const opt2 = document.createElement('option'); opt2.value = b.name; opt2.textContent = b.name; fbSelect.appendChild(opt2);
+  });
+}
+
+/* ---------- Cart functions ---------- */
+function addToCart(idx){
+  const item = MENU[idx];
+  const found = cart.find(i=>i.name===item.name);
+  if(found) found.qty++;
+  else cart.push({name:item.name, price:item.price, qty:1});
+  renderCart();
+}
+function addToCartFromMenu(name, price){
+  const found = cart.find(i=>i.name===name);
+  if(found) found.qty++;
+  else cart.push({name:name, price:price, qty:1});
+  renderCart();
+}
+function removeFromCart(index){
+  cart.splice(index,1);
+  renderCart();
+}
+function changeQty(index, delta){
+  if(!cart[index]) return;
+  cart[index].qty += delta;
+  if(cart[index].qty < 1) cart[index].qty = 1;
+  renderCart();
+}
+function renderCart(){
+  const el = document.getElementById('cart-items');
+  const orderTb = document.getElementById('order-summary');
+  const cartSub = document.getElementById('cart-subtotal');
+  const subtotalEl = document.getElementById('subtotal');
+  const totalEl = document.getElementById('total');
+  const discountEl = document.getElementById('discount');
+
+  el.innerHTML = '';
+  orderTb.innerHTML = '';
+  if(cart.length===0){
+    el.innerHTML = '<div class="muted small">Your cart is empty</div>';
+    orderTb.innerHTML = '<tr><td colspan="3" class="small muted">Your cart is empty</td></tr>';
+    cartSub.innerText = '0 EGP';
+    subtotalEl.innerText = '0 EGP';
+    discountEl.innerText = '0 EGP';
+    totalEl.innerText = '0 EGP';
+    return;
+  }
+  let sub = 0;
+  cart.forEach((it, idx)=> {
+    sub += it.price * it.qty;
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `<div class="meta"><strong>${escapeHtml(it.name)}</strong><div class="small">${it.qty} × ${it.price} EGP</div></div>
+      <div style="text-align:right">
+        <div style="font-weight:700">${it.price*it.qty} EGP</div>
+        <div style="margin-top:6px">
+          <button style="background:#fff;border:1px solid #eee;padding:6px;border-radius:6px;cursor:pointer;margin-right:6px" onclick="changeQty(${idx},-1)">-</button>
+          <button style="background:#e63946;color:#fff;border:none;padding:6px;border-radius:6px;cursor:pointer" onclick="changeQty(${idx},1)">+</button>
+          <button style="background:transparent;border:none;color:#d62828;padding:6px;border-radius:6px;cursor:pointer;margin-left:8px" onclick="removeFromCart(${idx})">Remove</button>
+        </div>
+      </div>`;
+    el.appendChild(div);
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${escapeHtml(it.name)}</td><td>${it.qty}</td><td>${it.price*it.qty} EGP</td>`;
+    orderTb.appendChild(tr);
+  });
+
+  // apply promo if currently valid
+  const applied = getAppliedPromo();
+  const promoResult = calculatePromo(sub, applied);
+
+  cartSub.innerText = sub + ' EGP';
+  subtotalEl.innerText = sub + ' EGP';
+  discountEl.innerText = (promoResult.discount) + ' EGP';
+  totalEl.innerText = (sub - promoResult.discount) + ' EGP';
+  document.getElementById('cart-subtotal').innerText = sub + ' EGP';
+}
+
+/* ---------- Promo code logic ---------- */
+let currentPromo = null;
+function applyPromo(){
+  const code = (document.getElementById('promo-code').value || '').trim().toUpperCase();
+  const msgDiv = document.getElementById('promo-msg');
+  if(!code){ msgDiv.innerText = 'Enter a promo code.'; msgDiv.style.color='#e63946'; return; }
+  if(!PROMOS[code]) { msgDiv.innerText = 'Invalid promo code.'; msgDiv.style.color='#e63946'; return; }
+  const subtotal = cart.reduce((s,it)=>s + it.price * it.qty, 0);
+  const promo = PROMOS[code];
+  if(promo.type==='percent' && subtotal < promo.min){
+    msgDiv.innerText = `Minimum ${promo.min} EGP required for this promo.`;
+    msgDiv.style.color='#e63946'; return;
+  }
+  // FREEFRIES check requires sandwich in cart
+  if(promo.type==='freeitem' && !cart.some(i=>/kufta|hawawshi|sandwich/i.test(i.name))){
+    msgDiv.innerText = 'Promo requires at least one sandwich in cart.'; msgDiv.style.color='#e63946'; return;
+  }
+  currentPromo = code;
+  msgDiv.innerText = `Promo "${code}" applied — ${promo.note}`;
+  msgDiv.style.color='#0b7a4d';
+  // if FREEFRIES, add one free fries item (qty 1, price 0)
+  if(code === 'FREEFRIES'){
+    const found = cart.find(i=>i.name === PROMOS['FREEFRIES'].item);
+    if(found) { /* if fries already present, don't add another free one */ }
+    else cart.push({name: PROMOS['FREEFRIES'].item, price:0, qty:1});
+  }
+  renderCart();
+}
+function getAppliedPromo(){ return currentPromo; }
+function calculatePromo(subtotal, code){
+  if(!code) return {discount:0};
+  const promo = PROMOS[code];
+  if(!promo) return {discount:0};
+  if(promo.type === 'percent'){
+    const disc = Math.round(subtotal * (promo.amount/100));
+    return {discount: disc};
+  }
+  if(promo.type === 'freeitem'){
+    // free item was added with price 0 so discount is 0 in calculation,
+    // but to show value we can show price of fries (assume 15)
+    // Actually we set fries price 0 when adding to cart — discount = normal fries price
+    const fries = MENU.find(m=>/fries|potato chips/i.test(m.name));
+    const val = fries ? fries.price : 15;
+    return {discount: val};
+  }
+  return {discount:0};
+}
+
+/* ---------- Checkout / Contact / Feedback handling (demo) ---------- */
+function placeOrder(e){
+  e.preventDefault();
+  if(cart.length === 0){ alert('Your cart is empty — add items first.'); return false; }
+  const payload = {
+    branch: document.getElementById('select-branch').value,
+    custName: document.getElementById('cust-name').value,
+    phone: document.getElementById('cust-phone').value,
+    address: document.getElementById('cust-address').value,
+    promo: document.getElementById('promo-code').value || null,
+    items: cart
+  };
+  alert('Order submitted (demo). Check console for details.');
+  console.log('ORDER PAYLOAD (demo):', payload);
+  // reset demo cart and forms
+  cart = []; currentPromo = null;
+  document.getElementById('promo-code').value = '';
+  document.getElementById('promo-msg').innerText = '';
+  document.getElementById('checkout-form').reset && document.getElementById('checkout-form').reset();
+  renderCart();
+  return false;
+}
+
+function submitContact(e){
+  e.preventDefault();
+  const data = {
+    reason: document.getElementById('contact-reason').value,
+    name: document.getElementById('contact-name').value,
+    email: document.getElementById('contact-email').value,
+    phone: document.getElementById('contact-phone').value,
+    message: document.getElementById('contact-message').value
+  };
+  alert('Message sent (demo). Thank you!');
+  console.log('CONTACT DEMO', data);
+  document.getElementById('contact-form').reset();
+  return false;
+}
+function submitFeedback(e){
+  e.preventDefault();
+  const data = { name: document.getElementById('fb-name').value, branch: document.getElementById('fb-branch').value, text: document.getElementById('fb-text').value };
+  alert('Feedback submitted (demo) — thank you!');
+  console.log('FEEDBACK DEMO', data);
+  document.getElementById('feedback-form').reset();
+  return false;
+}
+
+/* ---------- Small helpers ---------- */
+function openMap(branchName){
+  // open google maps search for branch
+  const query = encodeURIComponent(branchName + ' Kufta Cairo');
+  window.open('https://www.google.com/maps/search/?api=1&query=' + query, '_blank');
+}
+function openWhatsApp(){
+  // placeholder WhatsApp number, can be updated to actual link
+  window.open('https://wa.me/201550000000', '_blank');
+}
+function scrollTo(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  const topBar = document.querySelector('.topbar');
+  const offset = topBar ? topBar.offsetHeight + 8 : 80;
+  const y = el.getBoundingClientRect().top + window.pageYOffset - offset;
+  window.scrollTo({top: y, behavior: 'smooth'});
+}
+function escapeHtml(str){ return String(str).replace(/[&<>"']/g, s=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[s]); }
+
+/* ---------- Init render ---------- */
+renderMenu();
+renderBranches();
+renderCart();
+</script>
+
 </body>
 </html>
