@@ -64,6 +64,12 @@ a{color:inherit}
 .contact-panel{background:#111;color:#fff;padding:18px;border-radius:10px}
 .contact-panel input, .contact-panel textarea, .contact-panel select{width:100%;padding:10px;border-radius:8px;border:1px solid #333;background:#0b0b0b;color:#fff}
 
+/* survey section */
+.survey-card{background:#fff;padding:18px;border-radius:10px;border:1px solid #eee;box-shadow:0 6px 18px rgba(0,0,0,0.03)}
+.rating-stars{display:flex;gap:6px}
+.star{font-size:22px;cursor:pointer;color:#ddd}
+.star.selected{color:var(--red)}
+
 /* footer */
 footer{background:var(--black);color:var(--white);padding:18px;text-align:center}
 .socials{display:flex;gap:10px;justify-content:center;margin-top:8px}
@@ -91,6 +97,7 @@ footer{background:var(--black);color:var(--white);padding:18px;text-align:center
     <a href="#menu" onclick="navTo('menu')">Menu / Order</a>
     <a href="#promotions" onclick="navTo('promotions')">Promotions</a>
     <a href="#branches" onclick="navTo('branches')">Branches</a>
+    <a href="#survey" onclick="navTo('survey')">Survey</a>
     <a href="#contact" onclick="navTo('contact')">Contact / Franchise / Careers</a>
   </nav>
 </div>
@@ -100,7 +107,7 @@ footer{background:var(--black);color:var(--white);padding:18px;text-align:center
   <div class="container hero">
     <div class="hero-box">
       <h1>Kufta — Clean Street Food</h1>
-      <p class="small">Authentic kofta, hawawshi and fast street food. Order online or visit our main branches.</p>
+      <p class="small">Authentic kufta, hawawshi and fast street food. Order online or visit our main branches.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
         <button class="btn" onclick="navTo('menu')">View Menu</button>
         <button class="btn ghost" onclick="navTo('order')">Order Now</button>
@@ -190,7 +197,7 @@ footer{background:var(--black);color:var(--white);padding:18px;text-align:center
   <div class="container">
     <h2>Branches</h2>
     <div class="branches-grid" id="branches-grid">
-      <!-- JS will inject the three branch cards here -->
+      <!-- JS will inject the three branch cards here (show 3, toggle more) -->
     </div>
 
     <div style="margin-top:18px" class="card">
@@ -201,6 +208,54 @@ footer{background:var(--black);color:var(--white);padding:18px;text-align:center
           src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d13431.6178270223!2d31.235712!3d30.044420!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1696599999999"
           width="100%" height="100%" style="border:0"></iframe>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SURVEY (reviews/receipt) -->
+<section class="section" id="survey">
+  <div class="container">
+    <h2>Order Survey & Feedback</h2>
+    <div class="survey-card">
+      <p class="small">Enter your receipt number to leave feedback. This section was restored from the survey app — unchanged in style.</p>
+      <form id="survey-form" onsubmit="return submitSurvey(event)">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div>
+            <label class="small">Receipt Number</label>
+            <input id="survey-receipt" type="text" placeholder="e.g. 2025-0001" required>
+          </div>
+          <div>
+            <label class="small">Branch</label>
+            <select id="survey-branch"></select>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <label class="small">Your name (optional)</label>
+          <input id="survey-name" type="text" placeholder="Full name">
+        </div>
+
+        <div style="margin-top:12px">
+          <label class="small">Rating</label>
+          <div class="rating-stars" id="rating-stars" role="radiogroup" aria-label="Rating">
+            <span class="star" data-value="1" onclick="setRating(1)">★</span>
+            <span class="star" data-value="2" onclick="setRating(2)">★</span>
+            <span class="star" data-value="3" onclick="setRating(3)">★</span>
+            <span class="star" data-value="4" onclick="setRating(4)">★</span>
+            <span class="star" data-value="5" onclick="setRating(5)">★</span>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <label class="small">Comments</label>
+          <textarea id="survey-comments" placeholder="Tell us about your experience..." required></textarea>
+        </div>
+
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button class="btn" type="submit">Submit Feedback</button>
+          <button class="btn ghost" type="button" onclick="document.getElementById('survey-form').reset(); resetRating();">Reset</button>
+        </div>
+      </form>
     </div>
   </div>
 </section>
@@ -327,7 +382,11 @@ const MENU = [
 const BRANCHES = [
   {name:'Downtown (Talaat Harb)', addr:'Talaat Harb St, Downtown Cairo', hours:'10:00 - 02:00', phone:'15544'},
   {name:'Zamalek', addr:'Street 123, Zamalek, Cairo', hours:'10:00 - 02:00', phone:'15544'},
-  {name:'North Coast (Marina)', addr:'Marina Gate 5, North Coast', hours:'Seasonal hours', phone:'15544'}
+  {name:'North Coast (Marina)', addr:'Marina Gate 5, North Coast', hours:'Seasonal hours', phone:'15544'},
+  {name:'Dokki', addr:'45 Dokki Rd, Giza', hours:'10:00 - 01:00', phone:'15544'},
+  {name:'Nasr City', addr:'Central Plaza, Nasr City', hours:'11:00 - 00:00', phone:'15544'},
+  {name:'Heliopolis', addr:'Heliopolis Main St', hours:'11:00 - 00:00', phone:'15544'},
+  {name:'Maadi', addr:'Maadi Corniche', hours:'10:00 - 01:00', phone:'15544'}
 ];
 
 const PROMOS = {
@@ -339,6 +398,8 @@ const PROMOS = {
 /* ---------- State ---------- */
 let cart = []; // {name, price, qty}
 let appliedPromo = null;
+let showAllBranches = false;
+let currentRating = 0;
 
 /* ---------- Helpers ---------- */
 function q(sel){ return document.querySelector(sel) }
@@ -377,17 +438,30 @@ function renderMenu(){
   });
 }
 
-/* ---------- Render Branches ---------- */
+/* ---------- Render Branches (show 3, toggle more) ---------- */
 function renderBranches(){
   const grid = q('#branches-grid');
   grid.innerHTML='';
   const select = q('#branch-select');
+  const surveySelect = q('#survey-branch');
   select.innerHTML='';
-  BRANCHES.forEach(b=>{
+  surveySelect.innerHTML='';
+  const visible = showAllBranches ? BRANCHES : BRANCHES.slice(0,3);
+  visible.forEach((b, i)=>{
     const card = document.createElement('div'); card.className='card';
     card.innerHTML = `<h3 style="margin:0 0 6px">${b.name}</h3><div class="small">${b.addr}<br>Hours: ${b.hours}<br>Hotline: ${b.phone}</div><div style="margin-top:8px"><button onclick="openMap('${encodeURIComponent(b.addr)}')">View on Google Maps</button></div>`;
     grid.appendChild(card);
+  });
+  // show toggle button
+  const toggleWrap = document.createElement('div'); toggleWrap.style.gridColumn = '1/-1'; toggleWrap.style.textAlign='center'; toggleWrap.style.marginTop='8px';
+  const btn = document.createElement('button'); btn.className='btn ghost'; btn.innerText = showAllBranches ? 'Show Less' : 'Show More'; btn.onclick = ()=>{ showAllBranches = !showAllBranches; renderBranches(); };
+  toggleWrap.appendChild(btn);
+  grid.appendChild(toggleWrap);
+
+  // populate selects with full list (for checkout and survey)
+  BRANCHES.forEach(b=>{
     const opt = document.createElement('option'); opt.value=b.name; opt.textContent=b.name; select.appendChild(opt);
+    const opt2 = document.createElement('option'); opt2.value=b.name; opt2.textContent=b.name; surveySelect.appendChild(opt2);
   });
 }
 
@@ -402,7 +476,7 @@ function addToCart(idx){
 function addQuick(){ const val = q('#quick-item').value.split('|'); const name=val[0], price=Number(val[1]); const qty=Number(q('#quick-qty').value||1); const f=cart.find(c=>c.name===name); if(f) f.qty+=qty; else cart.push({name,price,qty}); renderCart(); }
 function changeQty(i, delta){ if(!cart[i]) return; cart[i].qty += delta; if(cart[i].qty<1) cart[i].qty=1; renderCart(); }
 function removeItem(i){ cart.splice(i,1); renderCart(); }
-function clearCart(){ cart=[]; appliedPromo=null; q('#checkout-promo').value=''; q('#checkout-promo-msg').innerText=''; renderCart(); }
+function clearCart(){ cart=[]; appliedPromo=null; q('#checkout-promo').value=''; q('#promo-feedback').innerText=''; renderCart(); }
 
 function calculateTotals(){
   const subtotal = cart.reduce((s,it)=>s + it.price*it.qty, 0);
@@ -452,13 +526,15 @@ function submitCheckout(e){ e.preventDefault(); if(cart.length===0){ alert('Cart
 /* ---------- Contact form ---------- */
 function submitContactForm(e){ e.preventDefault(); const data={ type:q('#contact-type').value, name:q('#contact-name').value, phone:q('#contact-phone').value, email:q('#contact-email').value, message:q('#contact-message').value }; alert('Message sent (demo). Thank you!'); console.log('CONTACT',data); document.getElementById('contact-form').reset(); return false; }
 
-/* ---------- Feedback (demo) ---------- */
-function submitFeedback(e){ e.preventDefault(); const data={name:q('#fb-name').value, branch:q('#fb-branch').value, text:q('#fb-text').value}; alert('Feedback received (demo). Thank you!'); console.log('FEEDBACK',data); document.getElementById('feedback-form').reset(); return false; }
+/* ---------- Survey submit (receipt + rating) ---------- */
+function setRating(v){ currentRating = v; document.querySelectorAll('.star').forEach(s=>{ s.classList.toggle('selected', Number(s.getAttribute('data-value')) <= v); }); }
+function resetRating(){ currentRating = 0; document.querySelectorAll('.star').forEach(s=> s.classList.remove('selected')); }
+
+function submitSurvey(e){ e.preventDefault(); const payload={ receipt: q('#survey-receipt').value, branch: q('#survey-branch').value, name: q('#survey-name').value || null, rating: currentRating, comments: q('#survey-comments').value }; if(!payload.receipt){ alert('Please enter receipt number'); return false; } if(!payload.rating){ alert('Please select a rating'); return false; } alert('Survey submitted (demo). Thank you!'); console.log('SURVEY PAYLOAD', payload); document.getElementById('survey-form').reset(); resetRating(); return false; }
 
 /* ---------- Utilities ---------- */
 function openMap(addr){ window.open('https://www.google.com/maps/search/?api=1&query=' + addr, '_blank') }
 function navTo(id){ const el=document.getElementById(id); if(!el) return; const topbar=document.querySelector('.topbar'); const offset = topbar ? topbar.offsetHeight + 8 : 80; const y = el.getBoundingClientRect().top + window.pageYOffset - offset; window.scrollTo({top:y,behavior:'smooth'}); }
-function formatEGP(n){ return Math.round(n) + ' EGP' }
 
 /* ---------- Init ---------- */
 renderMenu();
