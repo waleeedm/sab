@@ -9,78 +9,103 @@
 :root{
   --black:#0b0b0b; --white:#ffffff; --muted:#777; --red:#e63946; --red-dark:#b22a34; --card:#ffffff;
   --container:1100px;
+  --gap:16px;
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--white);color:var(--black);-webkit-font-smoothing:antialiased}
-a{color:inherit}
-.topbar{background:var(--white);border-bottom:1px solid #eee;position:sticky;top:0;z-index:1200}
-.logo-wrap{max-width:var(--container);margin:8px auto;padding:12px 18px 6px;text-align:center}
-.logo-wrap img{width:150px;height:auto;display:inline-block}
-.hotline{color:var(--muted);font-weight:600;margin-top:6px;font-size:14px}
-.nav{display:flex;justify-content:center;gap:14px;padding:10px 12px 18px;background:transparent;flex-wrap:wrap}
-.nav a{padding:8px 10px;border-radius:8px;font-weight:600;text-decoration:none;color:var(--black)}
-.nav a:hover{color:var(--red)}
+html,body{height:100%}
+body{margin:0;font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--white);color:var(--black);-webkit-font-smoothing:antialiased;line-height:1.45}
+a{color:inherit;text-decoration:none}
+.small{font-size:0.92rem;color:var(--muted)}
+
+/* Topbar */
+.topbar{background:var(--black);color:var(--white);position:sticky;top:0;z-index:1200}
+.logo-wrap{max-width:var(--container);margin:0 auto;padding:10px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo-wrap img{width:140px;height:auto;display:inline-block}
+.hotline{color:#fff;font-weight:700;margin-left:auto;font-size:14px}
+
+/* navigation */
+.navbar{background:transparent}
+.nav{max-width:var(--container);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:8px 18px}
+.nav-links{display:flex;gap:10px;align-items:center}
+.nav-links a{padding:8px 12px;border-radius:8px;font-weight:600;color:var(--white);background:transparent}
+.nav-links a:hover{background:rgba(255,255,255,0.04);color:var(--red)}
+
+/* hamburger */
+.hamburger{display:none;flex-direction:column;gap:4px;width:36px;cursor:pointer}
+.hamburger span{height:3px;background:#fff;border-radius:2px;display:block}
 
 /* sections */
-.section{padding:52px 18px}
+.section{padding:48px 18px}
 .container{max-width:var(--container);margin:0 auto}
 
 /* hero */
-.hero{display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:center}
-.hero-box{background:var(--white);padding:34px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.04);}
-.hero h1{margin:0 0 12px;font-size:clamp(26px,4vw,40px)}
-.hero p{margin:0 0 18px;color:var(--muted)}
-.btn{background:var(--red);color:var(--white);border:none;padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer}
+.hero{display:grid;grid-template-columns:1fr 340px;gap:22px;align-items:center}
+.hero-box{background:var(--white);padding:28px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.06)}
+.hero h1{margin:0 0 10px;font-size:clamp(22px,4vw,36px)}
+.hero p{margin:0 0 14px;color:var(--muted)}
+.btn{background:var(--red);color:var(--white);border:none;padding:11px 14px;border-radius:10px;font-weight:700;cursor:pointer}
 .btn.ghost{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--black)}
 .btn:hover{background:var(--red-dark)}
 
-/* menu + cart layout */
-.menu-cart{display:grid;grid-template-columns:1fr 380px;gap:20px;align-items:start}
-.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.card{background:var(--card);border-radius:10px;border:1px solid #eee;padding:12px;box-shadow:0 6px 18px rgba(0,0,0,0.03);}
-.menu-img{width:100%;height:160px;object-fit:cover;border-radius:8px}
+/* menu + cart */
+.menu-cart{display:grid;grid-template-columns:1fr 340px;gap:18px;align-items:start}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.card{background:var(--card);border-radius:10px;border:1px solid #eee;padding:12px;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+.menu-img{width:100%;height:150px;object-fit:cover;border-radius:8px}
 .item-foot{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
 .price{font-weight:800;color:var(--red)}
 
 /* cart */
-.cart-panel{position:sticky;top:92px}
+.cart-panel{position:sticky;top:86px}
 .cart-inner{background:var(--card);padding:14px;border-radius:10px;border:1px solid #eee}
 .cart-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed #f0f0f0}
-.cart-item .meta{max-width:60%}
 .qty-btn{background:#fff;border:1px solid #eee;padding:6px;border-radius:6px;cursor:pointer;margin-left:6px}
 
-/* order summary table */
+/* table */
 .table{width:100%;border-collapse:collapse;margin-top:12px;background:var(--card)}
 .table th,.table td{padding:10px;border:1px solid #eee;text-align:center}
-.small{font-size:0.9rem;color:var(--muted)}
 
-/* promotions */
+/* promos */
 .promo-grid{display:flex;gap:12px;flex-wrap:wrap}
 
-/* branches and map */
-.branches-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+/* branches */
+.branches-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
 
-/* contact form dark */
-.contact-panel{background:#111;color:#fff;padding:18px;border-radius:10px}
-.contact-panel input, .contact-panel textarea, .contact-panel select{width:100%;padding:10px;border-radius:8px;border:1px solid #333;background:#0b0b0b;color:#fff}
-
-/* survey section */
+/* survey */
 .survey-card{background:#fff;padding:18px;border-radius:10px;border:1px solid #eee;box-shadow:0 6px 18px rgba(0,0,0,0.03)}
 .rating-stars{display:flex;gap:6px}
 .star{font-size:22px;cursor:pointer;color:#ddd}
 .star.selected{color:var(--red)}
 
+/* contact panel */
+.contact-panel{background:#111;color:#fff;padding:18px;border-radius:10px}
+.contact-panel input, .contact-panel textarea, .contact-panel select{width:100%;padding:10px;border-radius:8px;border:1px solid #333;background:#0b0b0b;color:#fff}
+
 /* footer */
 footer{background:var(--black);color:var(--white);padding:18px;text-align:center}
 .socials{display:flex;gap:10px;justify-content:center;margin-top:8px}
-.socials a{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.06);display:inline-flex;align-items:center;justify-content:center;color:#fff;text-decoration:none}
+.socials a{width:38px;height:38px;border-radius:8px;background:rgba(255,255,255,0.06);display:inline-flex;align-items:center;justify-content:center;color:#fff;text-decoration:none}
+
+/* WhatsApp floating button */
+.whatsapp-float{position:fixed;right:18px;bottom:18px;background:#25d366;color:#fff;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,0.2);z-index:1300}
 
 /* responsive */
 @media (max-width:980px){
-  .hero{grid-template-columns:1fr; padding:12px 0}
+  .hero{grid-template-columns:1fr;gap:12px}
   .menu-cart{grid-template-columns:1fr}
   .cart-panel{position:relative;top:auto}
-  .nav{gap:8px;padding:10px;overflow:auto}
+  .hamburger{display:flex}
+  .nav-links{display:none}
+  .nav-links.mobile-open{display:flex;flex-direction:column;gap:8px;background:var(--black);padding:12px;border-radius:8px;margin-top:8px}
+  .logo-wrap{padding:10px 12px}
+  .menu-img{height:140px}
+}
+@media (max-width:520px){
+  .menu-img{height:120px}
+  .hero-box{padding:16px}
+  .cart-inner{padding:12px}
+  .logo-wrap img{width:120px}
+  .socials a{width:34px;height:34px}
 }
 </style>
 </head>
@@ -89,38 +114,48 @@ footer{background:var(--black);color:var(--white);padding:18px;text-align:center
 <!-- TOP -->
 <div class="topbar" id="top">
   <div class="logo-wrap">
-    <img src="logo.jpg" alt="Kufta logo">
-    <div class="hotline">Hotline: <strong>15544</strong></div>
+    <!-- Put your logo file named "logo.jpg" in the same folder -->
+    <img src="logo.jpg" alt="Kufta logo" id="site-logo">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="hotline">Hotline: <strong>15544</strong></div>
+      <div class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
   </div>
-  <nav class="nav" aria-label="Main navigation">
-    <a href="#home" onclick="navTo('home')">Home</a>
-    <a href="#menu" onclick="navTo('menu')">Menu / Order</a>
-    <a href="#promotions" onclick="navTo('promotions')">Promotions</a>
-    <a href="#branches" onclick="navTo('branches')">Branches</a>
-    <a href="#survey" onclick="navTo('survey')">Survey</a>
-    <a href="#contact" onclick="navTo('contact')">Contact / Franchise / Careers</a>
-  </nav>
+
+  <div class="navbar">
+    <div class="nav">
+      <div class="nav-links" id="nav-links">
+        <a href="#home" onclick="navTo('home')">Home</a>
+        <a href="#menu" onclick="navTo('menu')">Menu</a>
+        <a href="#promotions" onclick="navTo('promotions')">Promotions</a>
+        <a href="#branches" onclick="navTo('branches')">Branches</a>
+        <a href="#survey" onclick="navTo('survey')">Feedback</a>
+        <a href="#contact" onclick="navTo('contact')">Contact</a>
+      </div>
+      <div style="margin-left:auto" class="small">Kufta • Clean Street Food</div>
+    </div>
+  </div>
 </div>
 
 <!-- HERO -->
-<section class="section" id="home">
+<section class="section" id="home" aria-label="Home">
   <div class="container hero">
     <div class="hero-box">
       <h1>Kufta — Clean Street Food</h1>
-      <p class="small">Authentic kufta, hawawshi and fast street food. Order online or visit our main branches.</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <button class="btn" onclick="navTo('menu')">View Menu</button>
-        <button class="btn ghost" onclick="navTo('order')">Order Now</button>
+      <p class="small">Authentic Kufta, Hawawshi and fast street food. Order online or visit our branches.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+        <button class="btn" onclick="navTo('menu')">Order Now</button>
+        <button class="btn ghost" onclick="navTo('branches')">Find a Branch</button>
       </div>
     </div>
 
-    <aside class="card" style="padding:18px;">
+    <aside class="card" style="padding:16px;">
       <h3 style="margin:0 0 8px">Quick Order</h3>
       <p class="small" style="margin:0 0 10px">Select an item & quantity to add quickly to your cart.</p>
       <label class="small">Item</label>
-      <select id="quick-item" style="width:100%;padding:10px;border-radius:8px;border:1px solid #eee">
-        <!-- quick options filled by JS -->
-      </select>
+      <select id="quick-item" style="width:100%;padding:10px;border-radius:8px;border:1px solid #eee"></select>
       <div style="display:flex;gap:8px;margin-top:10px">
         <input id="quick-qty" type="number" min="1" value="1" style="flex:1;padding:10px;border-radius:8px;border:1px solid #eee">
         <button class="btn" onclick="addQuick()">Add</button>
@@ -129,19 +164,15 @@ footer{background:var(--black);color:var(--white);padding:18px;text-align:center
   </div>
 </section>
 
-<!-- MENU + CART (merged) -->
+<!-- MENU + CART -->
 <section class="section" id="menu">
   <div class="container">
-    <h2 style="text-align:left;margin-bottom:14px">Menu & Order</h2>
+    <h2 style="margin-bottom:12px">Menu & Order</h2>
     <div class="menu-cart">
-      <!-- MENU GRID -->
       <div>
-        <div class="menu-grid" id="menu-grid">
-          <!-- JS will inject menu item cards here -->
-        </div>
+        <div class="menu-grid" id="menu-grid"></div>
       </div>
 
-      <!-- CART / CHECKOUT -->
       <div class="cart-panel">
         <div class="cart-inner">
           <h3>Your Order</h3>
@@ -183,60 +214,44 @@ footer{background:var(--black);color:var(--white);padding:18px;text-align:center
 <section class="section" id="promotions">
   <div class="container">
     <h2>Promotions & Promo Codes</h2>
-    <p class="small">Benchmark: Talabat-like promos. Example codes below — use in checkout.</p>
-    <div class="promo-grid">
-      <div class="card"><strong>PROMO: 3ALADEEMO</strong><br><span class="small">15% off orders over 150 EGP</span></div>
-      <div class="card"><strong>PROMO: WELCOME10</strong><br><span class="small">10% off first orders over 100 EGP</span></div>
-      <div class="card"><strong>PROMO: FREEFRIES</strong><br><span class="small">Free Potato Chips with any sandwich</span></div>
-    </div>
+    <p class="small">Example codes: <strong>3ALADEEMO</strong>, <strong>WELCOME10</strong>, <strong>FREEFRIES</strong></p>
+    <div class="promo-grid" id="promo-grid" style="margin-top:12px"></div>
   </div>
 </section>
 
-<!-- BRANCHES + MAP -->
+<!-- BRANCHES -->
 <section class="section" id="branches">
   <div class="container">
     <h2>Branches</h2>
-    <div class="branches-grid" id="branches-grid">
-      <!-- JS will inject the three branch cards here (show 3, toggle more) -->
-    </div>
+    <div class="branches-grid" id="branches-grid"></div>
 
     <div style="margin-top:18px" class="card">
       <h3 style="margin:0 0 8px">Main map — Downtown (Talaat Harb)</h3>
       <div style="height:340px;margin-top:8px;border-radius:8px;overflow:hidden">
-        <iframe
-          loading="lazy"
-          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d13431.6178270223!2d31.235712!3d30.044420!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1696599999999"
+        <!-- Live embed with approximate Downtown coordinates; you can replace iframe src if you have exact map link -->
+        <iframe loading="lazy"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3457.123456789012!2d31.235712!3d30.044420!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145841e6b2bdc6b1%3A0x0!2sTalaat%20Harb%20St%2C%20Downtown%20Cairo!5e0!3m2!1sen!2seg!4v1696600000000"
           width="100%" height="100%" style="border:0"></iframe>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SURVEY (reviews/receipt) -->
+<!-- SURVEY -->
 <section class="section" id="survey">
   <div class="container">
     <h2>Order Survey & Feedback</h2>
     <div class="survey-card">
-      <p class="small">Enter your receipt number to leave feedback. This section was restored from the survey app — unchanged in style.</p>
+      <p class="small">Enter your receipt number to leave feedback.</p>
       <form id="survey-form" onsubmit="return submitSurvey(event)">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <div>
-            <label class="small">Receipt Number</label>
-            <input id="survey-receipt" type="text" placeholder="e.g. 2025-0001" required>
-          </div>
-          <div>
-            <label class="small">Branch</label>
-            <select id="survey-branch"></select>
-          </div>
+          <div><label class="small">Receipt Number</label><input id="survey-receipt" type="text" placeholder="e.g. 2025-0001" required></div>
+          <div><label class="small">Branch</label><select id="survey-branch"></select></div>
         </div>
 
-        <div style="margin-top:12px">
-          <label class="small">Your name (optional)</label>
-          <input id="survey-name" type="text" placeholder="Full name">
-        </div>
+        <div style="margin-top:12px"><label class="small">Your name (optional)</label><input id="survey-name" type="text" placeholder="Full name"></div>
 
-        <div style="margin-top:12px">
-          <label class="small">Rating</label>
+        <div style="margin-top:12px"><label class="small">Rating</label>
           <div class="rating-stars" id="rating-stars" role="radiogroup" aria-label="Rating">
             <span class="star" data-value="1" onclick="setRating(1)">★</span>
             <span class="star" data-value="2" onclick="setRating(2)">★</span>
@@ -246,10 +261,7 @@ footer{background:var(--black);color:var(--white);padding:18px;text-align:center
           </div>
         </div>
 
-        <div style="margin-top:12px">
-          <label class="small">Comments</label>
-          <textarea id="survey-comments" placeholder="Tell us about your experience..." required></textarea>
-        </div>
+        <div style="margin-top:12px"><label class="small">Comments</label><textarea id="survey-comments" placeholder="Tell us about your experience..." required></textarea></div>
 
         <div style="margin-top:12px;display:flex;gap:8px">
           <button class="btn" type="submit">Submit Feedback</button>
@@ -260,26 +272,18 @@ footer{background:var(--black);color:var(--white);padding:18px;text-align:center
   </div>
 </section>
 
-<!-- ORDER page (checkout form) -->
+<!-- ORDER / CHECKOUT -->
 <section class="section" id="order">
   <div class="container">
     <h2>Checkout</h2>
     <div class="card" style="padding:18px;">
       <form id="checkout-form" onsubmit="return submitCheckout(event)">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <div>
-            <label class="small">Full name</label>
-            <input id="chk-name" type="text" required>
-          </div>
-          <div>
-            <label class="small">Phone</label>
-            <input id="chk-phone" type="tel" required>
-          </div>
+          <div><label class="small">Full name</label><input id="chk-name" type="text" required></div>
+          <div><label class="small">Phone</label><input id="chk-phone" type="tel" required></div>
         </div>
-        <div style="margin-top:12px">
-          <label class="small">Delivery address</label>
-          <textarea id="chk-address" required></textarea>
-        </div>
+
+        <div style="margin-top:12px"><label class="small">Delivery address</label><textarea id="chk-address" required></textarea></div>
 
         <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
           <label class="small" style="margin:0">Use promo code</label>
@@ -314,7 +318,7 @@ footer{background:var(--black);color:var(--white);padding:18px;text-align:center
   </div>
 </section>
 
-<!-- CONTACT / FRANCHISE / CAREERS unified -->
+<!-- CONTACT -->
 <section class="section" id="contact">
   <div class="container">
     <h2>Contact / Franchise / Careers</h2>
@@ -326,16 +330,20 @@ footer{background:var(--black);color:var(--white);padding:18px;text-align:center
           <option>Franchise Request</option>
           <option>Career Opportunity</option>
         </select>
+
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
           <input id="contact-name" type="text" placeholder="Full name" required>
           <input id="contact-phone" type="tel" placeholder="Phone">
         </div>
+
         <div style="margin-top:12px">
           <input id="contact-email" type="email" placeholder="Email" required>
         </div>
+
         <div style="margin-top:12px">
           <textarea id="contact-message" placeholder="Tell us about your inquiry..." required></textarea>
         </div>
+
         <div style="margin-top:12px">
           <button class="btn" type="submit">Send Message</button>
         </div>
@@ -346,25 +354,29 @@ footer{background:var(--black);color:var(--white);padding:18px;text-align:center
 
 <!-- FOOTER -->
 <footer>
-  <div>Kufta • Hotline <strong>15544</strong> • © 2025</div>
-  <div class="socials" aria-hidden="false">
-    <a href="#" title="Instagram"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="white" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.3 2.4.5.6.3 1 .6 1.5 1.1s.8 1 1.1 1.5c.2.5.4 1.2.5 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.9-.5 2.4-.3.6-.6 1-1.1 1.5s-1 0-1.5 1.1c-.5.2-1.2.4-2.4.5-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.3-2.4-.5-.6-.3-1-.6-1.5-1.1S2.6 20 2.3 19.4c-.2-.5-.4-1.2-.5-2.4C1.6 15.7 1.6 15.3 1.6 12s0-3.6.1-4.9c.1-1.2.3-1.9.5-2.4.3-.6.6-1 1.1-1.5S5 2.9 5.5 2.6C6 .2 6.7 2.2 12 2.2z"/></svg></a>
-    <a href="#" title="Facebook"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="white" d="M22 12.1C22 6.6 17.5 2 12 2S2 6.6 2 12.1c0 5 3.7 9.2 8.5 9.9v-7H8.1v-2.9h2.4V9.2c0-2.4 1.4-3.8 3.6-3.8 1 0 2 .2 2 .2v2.2h-1.1c-1.1 0-1.4.7-1.4 1.4v1.7h2.5l-.4 2.9h-2.1v7C18.3 21.3 22 17.1 22 12.1z"/></svg></a>
-    <a href="#" title="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="white" d="M20.5 3.5C18.9 2 16.8 1 14.5 1 8.8 1 4 5.8 4 11.5c0 1.9.5 3.8 1.5 5.4L4 23l6.2-1.6c1.5.8 3.1 1.3 4.8 1.3 5.7 0 10.5-4.8 10.5-10.5 0-2.3-1-4.4-2.9-6zM12 20c-1.3 0-2.6-.3-3.8-.9l-.3-.2-3.7.9.9-3.6-.2-.4C5.1 13.6 4.5 12.1 4.5 10.6 4.5 6.3 8.2 2.7 12.5 2.7 16.7 2.7 20.5 6.3 20.5 10.6 20.5 14.9 16.8 18.6 12.5 18.6 12.3 18.6 12.1 18.6 12 18.6z"/></svg></a>
+  <div style="font-weight:700">Kufta • Hotline <strong>15544</strong> • © 2025</div>
+  <div class="socials" style="margin-top:8px">
+    <a href="#" title="Instagram" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="white" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.3 2.4.5.6.3 1 .6 1.5 1.1s.8 1 1.1 1.5c.2.5.4 1.2.5 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.9-.5 2.4-.3.6-.6 1-1.1 1.5s-1 0-1.5 1.1c-.5.2-1.2.4-2.4.5-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.3-2.4-.5-.6-.3-1-.6-1.5-1.1S2.6 20 2.3 19.4c-.2-.5-.4-1.2-.5-2.4C1.6 15.7 1.6 15.3 1.6 12s0-3.6.1-4.9c.1-1.2.3-1.9.5-2.4.3-.6.6-1 1.1-1.5S5 2.9 5.5 2.6C6 .2 6.7 2.2 12 2.2z"/></svg></a>
+    <a href="#" title="Facebook" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="white" d="M22 12.1C22 6.6 17.5 2 12 2S2 6.6 2 12.1c0 5 3.7 9.2 8.5 9.9v-7H8.1v-2.9h2.4V9.2c0-2.4 1.4-3.8 3.6-3.8 1 0 2 .2 2 .2v2.2h-1.1c-1.1 0-1.4.7-1.4 1.4v1.7h2.5l-.4 2.9h-2.1v7C18.3 21.3 22 17.1 22 12.1z"/></svg></a>
+    <a href="https://wa.me/2010015544" title="WhatsApp" aria-label="WhatsApp" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="white" d="M20.5 3.5C18.9 2 16.8 1 14.5 1 8.8 1 4 5.8 4 11.5c0 1.9.5 3.8 1.5 5.4L4 23l6.2-1.6c1.5.8 3.1 1.3 4.8 1.3 5.7 0 10.5-4.8 10.5-10.5 0-2.3-1-4.4-2.9-6zM12 20c-1.3 0-2.6-.3-3.8-.9l-.3-.2-3.7.9.9-3.6-.2-.4C5.1 13.6 4.5 12.1 4.5 10.6 4.5 6.3 8.2 2.7 12.5 2.7 16.7 2.7 20.5 6.3 20.5 10.6 20.5 14.9 16.8 18.6 12.5 18.6 12.3 18.6 12.1 18.6 12 18.6z"/></svg></a>
   </div>
 </footer>
 
+<!-- WhatsApp floating shortcut -->
+<a class="whatsapp-float" href="https://wa.me/2010015544" target="_blank" rel="noopener" title="Chat on WhatsApp" aria-label="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M20.5 3.5C18.9 2 16.8 1 14.5 1 8.8 1 4 5.8 4 11.5c0 1.9.5 3.8 1.5 5.4L4 23l6.2-1.6c1.5.8 3.1 1.3 4.8 1.3 5.7 0 10.5-4.8 10.5-10.5 0-2.3-1-4.4-2.9-6zM12 20c-1.3 0-2.6-.3-3.8-.9l-.3-.2-3.7.9.9-3.6-.2-.4C5.1 13.6 4.5 12.1 4.5 10.6 4.5 6.3 8.2 2.7 12.5 2.7 16.7 2.7 20.5 6.3 20.5 10.6 20.5 14.9 16.8 18.6 12.5 18.6z"/></svg>
+</a>
+
 <script>
-/* ---------- Data ---------- */
+/* ---------- Data (unchanged) ---------- */
 const MENU = [
-  {category:'Sandwiches', name:'Kufta', price:60, desc:'Classic grilled kofta sandwich'},
+  {category:'Sandwiches', name:'Kufta', price:60, desc:'Classic grilled kufta sandwich'},
   {category:'Sandwiches', name:'Hawawshi', price:55, desc:'Traditional Egyptian spiced meat hawawshi'},
   {category:'Sandwiches', name:'Kufta Double', price:105, desc:'Double portion of kufta'},
   {category:'Sandwiches', name:'3 Sandwiches Box', price:170, desc:'Mix of Kufta/Hawawshi'},
   {category:'Sandwiches', name:'4 Sandwiches Box', price:225, desc:'Mix of Kufta/Hawawshi'},
   {category:'Sandwiches', name:'8 Sandwiches Box', price:450, desc:'Mix of Kufta/Hawawshi'},
   {category:'Sandwiches', name:'10 Sandwiches Box', price:560, desc:'Mix of Kufta/Hawawshi'},
-
   {category:'Sides', name:'Whiskey (Salad Drink)', price:15, desc:'Tangy Egyptian-style salad drink'},
   {category:'Sides', name:'Mixed Pickles / Cucumber', price:10, desc:'House pickled mix'},
   {category:'Sides', name:'Pickled Tomatoes', price:15, desc:'Homemade pickled tomatoes'},
@@ -372,7 +384,6 @@ const MENU = [
   {category:'Sides', name:'Tahini', price:15, desc:'Classic tahini dip'},
   {category:'Sides', name:'Spicy Tahini', price:15, desc:'Tahini with a spicy twist'},
   {category:'Sides', name:'Potato Chips', price:15, desc:'Freshly fried chips'},
-
   {category:'Drinks', name:'Rayeb Lemon & Blueberry', price:25, desc:'Refreshing drink'},
   {category:'Drinks', name:'Tabasko (Fruity & Spicy)', price:25, desc:'Fruity spicy juice'},
   {category:'Drinks', name:'V7', price:25, desc:'Carbonated energy drink'},
@@ -396,32 +407,30 @@ const PROMOS = {
 };
 
 /* ---------- State ---------- */
-let cart = []; // {name, price, qty}
+let cart = [];
 let appliedPromo = null;
 let showAllBranches = false;
 let currentRating = 0;
 
 /* ---------- Helpers ---------- */
-function q(sel){ return document.querySelector(sel) }
+function q(s){ return document.querySelector(s) }
 function formatEGP(n){ return Math.round(n) + ' EGP' }
 function chooseImg(name){
   const s = name.toLowerCase();
-  if(/kufta|hawawshi|sandwich/.test(s)) return 'https://images.unsplash.com/photo-1601050690597-1f38f1f83a07?auto=format&fit=crop&w=800&q=60';
-  if(/chips|fries/.test(s)) return 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=60';
-  if(/drink|rayeb|v7|tabasko/.test(s)) return 'https://images.unsplash.com/photo-1542444459-db4d4b3d1b2b?auto=format&fit=crop&w=800&q=60';
-  return 'https://images.unsplash.com/photo-1606732803863-24b3f2d4ef7c?auto=format&fit=crop&w=800&q=60';
+  if(/kufta|hawawshi|sandwich/.test(s)) return 'https://images.unsplash.com/photo-1601050690597-1f38f1f83a07?auto=format&fit=crop&w=900&q=60';
+  if(/chips|fries/.test(s)) return 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=60';
+  if(/drink|rayeb|v7|tabasko/.test(s)) return 'https://images.unsplash.com/photo-1542444459-db4d4b3d1b2b?auto=format&fit=crop&w=900&q=60';
+  return 'https://images.unsplash.com/photo-1606732803863-24b3f2d4ef7c?auto=format&fit=crop&w=900&q=60';
 }
 
-/* ---------- Render Menu & Quick select ---------- */
+/* ---------- Render functions ---------- */
 function renderMenu(){
-  const grid = q('#menu-grid');
-  grid.innerHTML='';
+  const grid = q('#menu-grid'); grid.innerHTML='';
   MENU.forEach((it, idx)=>{
-    const div = document.createElement('div');
-    div.className='card';
+    const div = document.createElement('div'); div.className='card';
     div.innerHTML = `
       <img class="menu-img" src="${chooseImg(it.name)}" alt="${it.name}">
-      <div style="padding:10px 0">
+      <div style="padding:8px 0">
         <h3 style="margin:0 0 6px">${it.name}</h3>
         <div class="small">${it.desc}</div>
         <div class="item-foot"><div class="price">${it.price} EGP</div><div><button onclick="addToCart(${idx})" class="btn">Add</button></div></div>
@@ -430,39 +439,40 @@ function renderMenu(){
   });
 
   // quick select
-  const quick = q('#quick-item');
-  quick.innerHTML='';
+  const quick = q('#quick-item'); quick.innerHTML='';
   MENU.filter(m=>m.category==='Sandwiches').forEach(m=>{
     const opt = document.createElement('option'); opt.value = m.name + '|' + m.price; opt.textContent = `${m.name} — ${m.price} EGP`;
     quick.appendChild(opt);
   });
 }
 
-/* ---------- Render Branches (show 3, toggle more) ---------- */
+function renderPromos(){
+  const p = q('#promo-grid'); p.innerHTML='';
+  Object.keys(PROMOS).forEach(k=>{
+    const div = document.createElement('div'); div.className='card';
+    div.innerHTML = `<strong>${k}</strong><br><span class="small">${PROMOS[k].note}</span>`;
+    p.appendChild(div);
+  });
+}
+
 function renderBranches(){
-  const grid = q('#branches-grid');
-  grid.innerHTML='';
-  const select = q('#branch-select');
-  const surveySelect = q('#survey-branch');
-  select.innerHTML='';
-  surveySelect.innerHTML='';
+  const grid = q('#branches-grid'); grid.innerHTML='';
   const visible = showAllBranches ? BRANCHES : BRANCHES.slice(0,3);
-  visible.forEach((b, i)=>{
+  visible.forEach(b=>{
     const card = document.createElement('div'); card.className='card';
-    card.innerHTML = `<h3 style="margin:0 0 6px">${b.name}</h3><div class="small">${b.addr}<br>Hours: ${b.hours}<br>Hotline: ${b.phone}</div><div style="margin-top:8px"><button onclick="openMap('${encodeURIComponent(b.addr)}')">View on Google Maps</button></div>`;
+    card.innerHTML = `<h3 style="margin:0 0 6px">${b.name}</h3><div class="small">${b.addr}<br>Hours: ${b.hours}<br>Hotline: ${b.phone}</div><div style="margin-top:8px"><button class="btn ghost" onclick="openMap('${encodeURIComponent(b.addr)}')">View on Google Maps</button></div>`;
     grid.appendChild(card);
   });
-  // show toggle button
-  const toggleWrap = document.createElement('div'); toggleWrap.style.gridColumn = '1/-1'; toggleWrap.style.textAlign='center'; toggleWrap.style.marginTop='8px';
-  const btn = document.createElement('button'); btn.className='btn ghost'; btn.innerText = showAllBranches ? 'Show Less' : 'Show More'; btn.onclick = ()=>{ showAllBranches = !showAllBranches; renderBranches(); };
-  toggleWrap.appendChild(btn);
-  grid.appendChild(toggleWrap);
+  // Show more toggle
+  const toggle = document.createElement('div'); toggle.style.gridColumn='1/-1'; toggle.style.textAlign='center'; toggle.style.marginTop='8px';
+  const btn = document.createElement('button'); btn.className='btn ghost'; btn.innerText = showAllBranches ? 'Show Less' : 'Show More';
+  btn.onclick = ()=>{ showAllBranches = !showAllBranches; renderBranches(); };
+  toggle.appendChild(btn); grid.appendChild(toggle);
 
-  // populate selects with full list (for checkout and survey)
-  BRANCHES.forEach(b=>{
-    const opt = document.createElement('option'); opt.value=b.name; opt.textContent=b.name; select.appendChild(opt);
-    const opt2 = document.createElement('option'); opt2.value=b.name; opt2.textContent=b.name; surveySelect.appendChild(opt2);
-  });
+  // fill selects (checkout + survey)
+  const select = q('#branch-select'); const surveySelect = q('#survey-branch');
+  select.innerHTML=''; surveySelect.innerHTML='';
+  BRANCHES.forEach(b=>{ const opt=document.createElement('option'); opt.value=b.name; opt.textContent=b.name; select.appendChild(opt); surveySelect.appendChild(opt.cloneNode(true)); });
 }
 
 /* ---------- Cart logic ---------- */
@@ -473,22 +483,28 @@ function addToCart(idx){
   else cart.push({name:it.name, price:it.price, qty:1});
   renderCart();
 }
-function addQuick(){ const val = q('#quick-item').value.split('|'); const name=val[0], price=Number(val[1]); const qty=Number(q('#quick-qty').value||1); const f=cart.find(c=>c.name===name); if(f) f.qty+=qty; else cart.push({name,price,qty}); renderCart(); }
-function changeQty(i, delta){ if(!cart[i]) return; cart[i].qty += delta; if(cart[i].qty<1) cart[i].qty=1; renderCart(); }
+
+function addQuick(){
+  const val = q('#quick-item').value.split('|');
+  const name = val[0], price = Number(val[1]); const qty = Number(q('#quick-qty').value||1);
+  const f = cart.find(c=>c.name===name);
+  if(f) f.qty += qty; else cart.push({name, price, qty});
+  renderCart();
+}
+
+function changeQty(i, delta){ if(!cart[i]) return; cart[i].qty += delta; if(cart[i].qty < 1) cart[i].qty = 1; renderCart(); }
 function removeItem(i){ cart.splice(i,1); renderCart(); }
-function clearCart(){ cart=[]; appliedPromo=null; q('#checkout-promo').value=''; q('#promo-feedback').innerText=''; renderCart(); }
+function clearCart(){ cart = []; appliedPromo = null; q('#checkout-promo').value=''; q('#promo-feedback').innerText=''; renderCart(); }
 
 function calculateTotals(){
   const subtotal = cart.reduce((s,it)=>s + it.price*it.qty, 0);
   let discount = 0;
   if(appliedPromo){
     const promo = PROMOS[appliedPromo];
-    if(promo){
-      if(promo.type === 'percent' && subtotal >= promo.min){ discount = Math.round(subtotal * (promo.amt/100)); }
-      if(promo.type === 'freeitem'){
-        const fries = MENU.find(m=>/potato chips|potato/i.test(m.name)) || MENU.find(m=>/fries/i.test(m.name));
-        discount = fries ? fries.price : 15;
-      }
+    if(promo.type === 'percent' && subtotal >= promo.min){ discount = Math.round(subtotal * (promo.amt/100)); }
+    if(promo.type === 'freeitem'){
+      const fries = MENU.find(m=>/potato chips|potato/i.test(m.name)) || MENU.find(m=>/fries/i.test(m.name));
+      discount = fries ? fries.price : 15;
     }
   }
   const total = subtotal - discount;
@@ -496,11 +512,16 @@ function calculateTotals(){
 }
 
 function renderCart(){
-  const el = q('#cart-items');
-  const tb = q('#checkout-summary');
-  el.innerHTML=''; tb.innerHTML='';
-  if(cart.length===0){ el.innerHTML='<div class="small muted">Cart is empty</div>'; tb.innerHTML='<tr><td colspan="3" class="small muted">Cart is empty</td></tr>'; q('#cart-subtotal').innerText='0 EGP'; q('#cart-discount').innerText='0 EGP'; q('#cart-total').innerText='0 EGP'; q('#checkout-sub').innerText='0 EGP'; q('#checkout-disc').innerText='0 EGP'; q('#checkout-total').innerText='0 EGP'; return; }
-  cart.forEach((c, i)=>{
+  const el = q('#cart-items'); const tb = q('#checkout-summary');
+  el.innerHTML = ''; tb.innerHTML = '';
+  if(cart.length === 0){
+    el.innerHTML = '<div class="small muted">Cart is empty</div>';
+    tb.innerHTML = '<tr><td colspan="3" class="small muted">Cart is empty</td></tr>';
+    q('#cart-subtotal').innerText = '0 EGP'; q('#cart-discount').innerText = '0 EGP'; q('#cart-total').innerText = '0 EGP';
+    q('#checkout-sub').innerText = '0 EGP'; q('#checkout-disc').innerText = '0 EGP'; q('#checkout-total').innerText = '0 EGP';
+    return;
+  }
+  cart.forEach((c,i)=>{
     const div = document.createElement('div'); div.className='cart-item';
     div.innerHTML = `<div class="meta"><strong>${c.name}</strong><div class="small">${c.qty} × ${c.price} EGP</div></div><div><div style="font-weight:700">${c.price*c.qty} EGP</div><div style="margin-top:6px"><button class="qty-btn" onclick="changeQty(${i},-1)">-</button><button class="qty-btn" onclick="changeQty(${i},1)">+</button><button style="background:transparent;border:none;color:${'#d62828'};margin-left:8px;cursor:pointer" onclick="removeItem(${i})">Remove</button></div></div>`;
     el.appendChild(div);
@@ -518,28 +539,61 @@ function renderCart(){
 /* ---------- Promo application ---------- */
 function applyCheckoutPromo(){ const code=(q('#checkout-promo').value||'').trim().toUpperCase(); applyPromo(code,'#promo-feedback'); }
 function applyPromoAtCheckout(){ const code=(q('#chk-promo').value||'').trim().toUpperCase(); applyPromo(code,'#chk-promo-msg'); }
-function applyPromo(code, feedbackSelector){ const fb=q(feedbackSelector); if(!code){ fb.innerText='Enter a promo code.'; fb.style.color='#e63946'; return; } if(!PROMOS[code]){ fb.innerText='Invalid promo code.'; fb.style.color='#e63946'; return; } const subtotal = cart.reduce((s,it)=>s + it.price*it.qty,0); const p=PROMOS[code]; if(p.type==='percent' && subtotal < p.min){ fb.innerText = `Minimum ${p.min} EGP required.`; fb.style.color='#e63946'; return; } if(p.type==='freeitem' && !cart.some(i=>/kufta|hawawshi|sandwich/i.test(i.name))){ fb.innerText='Requires at least one sandwich in cart.'; fb.style.color='#e63946'; return; } appliedPromo = code; fb.innerText = `Applied: ${p.note}`; fb.style.color = '#0b7a4d'; if(code==='FREEFRIES'){ const f = cart.find(i=>i.name===PROMOS.FREEFRIES.item); if(!f) cart.push({name:PROMOS.FREEFRIES.item, price:0, qty:1}); } renderCart(); }
+function applyPromo(code, feedbackSelector){
+  const fb = q(feedbackSelector);
+  if(!code){ fb.innerText='Enter a promo code.'; fb.style.color='#e63946'; return; }
+  if(!PROMOS[code]){ fb.innerText='Invalid promo code.'; fb.style.color='#e63946'; return; }
+  const subtotal = cart.reduce((s,it)=>s + it.price*it.qty, 0);
+  const p = PROMOS[code];
+  if(p.type === 'percent' && subtotal < p.min){ fb.innerText = `Minimum ${p.min} EGP required.`; fb.style.color='#e63946'; return; }
+  if(p.type === 'freeitem' && !cart.some(i=>/kufta|hawawshi|sandwich/i.test(i.name))){ fb.innerText = 'Requires at least one sandwich in cart.'; fb.style.color='#e63946'; return; }
+  appliedPromo = code; fb.innerText = `Applied: ${p.note}`; fb.style.color = '#0b7a4d';
+  if(code === 'FREEFRIES'){ const f = cart.find(i=>i.name===PROMOS.FREEFRIES.item); if(!f) cart.push({name:PROMOS.FREEFRIES.item, price:0, qty:1}); }
+  renderCart();
+}
 
 /* ---------- Checkout submit (demo) ---------- */
-function submitCheckout(e){ e.preventDefault(); if(cart.length===0){ alert('Cart is empty'); navTo('menu'); return false; } const payload={ branch:q('#branch-select').value, name:q('#chk-name').value, phone:q('#chk-phone').value, address:q('#chk-address').value, promo:q('#chk-promo').value||null, items:cart }; alert('Order submitted (demo). Check console for payload.'); console.log('ORDER PAYLOAD',payload); cart=[]; appliedPromo=null; renderCart(); document.getElementById('checkout-form').reset(); return false; }
+function submitCheckout(e){
+  e.preventDefault();
+  if(cart.length === 0){ alert('Cart is empty'); navTo('menu'); return false; }
+  const payload = { branch:q('#branch-select').value, name:q('#chk-name').value, phone:q('#chk-phone').value, address:q('#chk-address').value, promo:q('#chk-promo').value||null, items:cart };
+  alert('Order submitted (demo). Check console for payload.');
+  console.log('ORDER PAYLOAD', payload);
+  cart = []; appliedPromo = null; renderCart(); document.getElementById('checkout-form').reset();
+  return false;
+}
 
-/* ---------- Contact form ---------- */
-function submitContactForm(e){ e.preventDefault(); const data={ type:q('#contact-type').value, name:q('#contact-name').value, phone:q('#contact-phone').value, email:q('#contact-email').value, message:q('#contact-message').value }; alert('Message sent (demo). Thank you!'); console.log('CONTACT',data); document.getElementById('contact-form').reset(); return false; }
+/* ---------- Contact form (demo) ---------- */
+function submitContactForm(e){
+  e.preventDefault();
+  const data = { type:q('#contact-type').value, name:q('#contact-name').value, phone:q('#contact-phone').value, email:q('#contact-email').value, message:q('#contact-message').value };
+  alert('Message sent (demo). Thank you!');
+  console.log('CONTACT', data);
+  document.getElementById('contact-form').reset();
+  return false;
+}
 
-/* ---------- Survey submit (receipt + rating) ---------- */
+/* ---------- Survey ---------- */
 function setRating(v){ currentRating = v; document.querySelectorAll('.star').forEach(s=>{ s.classList.toggle('selected', Number(s.getAttribute('data-value')) <= v); }); }
 function resetRating(){ currentRating = 0; document.querySelectorAll('.star').forEach(s=> s.classList.remove('selected')); }
-
-function submitSurvey(e){ e.preventDefault(); const payload={ receipt: q('#survey-receipt').value, branch: q('#survey-branch').value, name: q('#survey-name').value || null, rating: currentRating, comments: q('#survey-comments').value }; if(!payload.receipt){ alert('Please enter receipt number'); return false; } if(!payload.rating){ alert('Please select a rating'); return false; } alert('Survey submitted (demo). Thank you!'); console.log('SURVEY PAYLOAD', payload); document.getElementById('survey-form').reset(); resetRating(); return false; }
+function submitSurvey(e){
+  e.preventDefault();
+  const payload = { receipt:q('#survey-receipt').value, branch:q('#survey-branch').value, name:q('#survey-name').value||null, rating:currentRating, comments:q('#survey-comments').value };
+  if(!payload.receipt){ alert('Please enter receipt number'); return false; }
+  if(!payload.rating){ alert('Please select a rating'); return false; }
+  alert('Survey submitted (demo). Thank you!');
+  console.log('SURVEY PAYLOAD', payload);
+  document.getElementById('survey-form').reset(); resetRating();
+  return false;
+}
 
 /* ---------- Utilities ---------- */
 function openMap(addr){ window.open('https://www.google.com/maps/search/?api=1&query=' + addr, '_blank') }
 function navTo(id){ const el=document.getElementById(id); if(!el) return; const topbar=document.querySelector('.topbar'); const offset = topbar ? topbar.offsetHeight + 8 : 80; const y = el.getBoundingClientRect().top + window.pageYOffset - offset; window.scrollTo({top:y,behavior:'smooth'}); }
+function toggleMobileNav(){ const links=q('#nav-links'); links.classList.toggle('mobile-open'); }
 
 /* ---------- Init ---------- */
-renderMenu();
-renderBranches();
-renderCart();
+renderMenu(); renderPromos(); renderBranches(); renderCart();
 </script>
 </body>
 </html>
