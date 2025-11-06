@@ -13,7 +13,7 @@
       --bg:#fafafa;
       --card:#ffffff;
       --muted:#6b7280;
-      --accent:#0a84ff; /* apple-like blue */
+      --accent:#0a84ff;
       --glass: rgba(255,255,255,0.6);
       --radius:18px;
       --max:1200px;
@@ -26,7 +26,6 @@
     }
     .container{max-width:var(--max);margin:0 auto;padding:28px}
 
-    /* Header */
     header{display:flex;align-items:center;justify-content:space-between;padding:24px 0}
     .brand{display:flex;gap:14px;align-items:center}
     .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#5ac8fa);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px;box-shadow:0 6px 20px rgba(10,132,255,0.12)}
@@ -35,7 +34,9 @@
     .cta{background:var(--accent);color:white;padding:10px 16px;border-radius:12px;font-weight:700;text-decoration:none}
 
     /* Hero */
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center;margin-top:24px}
+    .hero{position:relative;display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center;margin-top:24px;background:url('assets/images/hero-bg.jpg') center/cover no-repeat;border-radius:24px;overflow:hidden;padding:36px;}
+    .hero::before{content:"";position:absolute;inset:0;background:rgba(255,255,255,0.6);backdrop-filter:blur(4px);z-index:0;}
+    .hero > *{position:relative;z-index:1;}
     .hero-card{background:var(--card);border-radius:24px;padding:36px;box-shadow:0 10px 30px rgba(2,6,23,0.06)}
     .eyebrow{color:var(--accent);font-weight:700;font-size:13px}
     h1{font-size:38px;margin:10px 0 6px}
@@ -44,39 +45,27 @@
     .stat{background:linear-gradient(180deg,rgba(250,250,250,0.7),var(--glass));padding:14px;border-radius:14px;min-width:110px}
     .stat b{display:block;font-size:20px}
 
-    /* Brands grid */
     .brands{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-top:26px}
     .brand-card{background:var(--card);padding:18px;border-radius:16px;box-shadow:0 6px 18px rgba(2,6,23,0.04);display:flex;gap:12px;align-items:center}
     .brand-card img{width:64px;height:64px;border-radius:10px;object-fit:cover}
     .brand-info h4{margin:0;font-size:16px}
     .brand-info p{margin:6px 0 0;color:var(--muted);font-size:13px}
 
-    /* Sections */
     section{margin-top:40px}
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
 
-    /* Values */
     .values{display:flex;gap:16px}
     .value{background:var(--card);border-radius:12px;padding:18px;flex:1;box-shadow:0 6px 18px rgba(2,6,23,0.04)}
 
-    /* Contact */
     .contact{display:flex;flex-direction:column;gap:12px}
     .contact .row{display:flex;gap:10px;align-items:center}
 
+    form input, form textarea{padding:12px;border-radius:10px;border:1px solid #eef2f6;font-family:inherit}
+    form button{cursor:pointer;border:none}
+
     footer{margin-top:48px;padding:28px 0;border-top:1px solid #eef2f6;color:var(--muted)}
 
-    /* Responsive */
-    @media(max-width:900px){
-      .hero{grid-template-columns:1fr;}
-      header{padding:14px 0}
-      .logo{width:48px;height:48px}
-    }
-
-    /* small helpers */
-    .muted{color:var(--muted)}
-    .pill{display:inline-block;background:#eef6ff;color:var(--accent);padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px}
-    .card-list{display:flex;flex-direction:column;gap:12px}
-    a.inline{color:var(--accent);text-decoration:none;font-weight:700}
+    @media(max-width:900px){.hero{grid-template-columns:1fr;}header{padding:14px 0}.logo{width:48px;height:48px}}
   </style>
 </head>
 <body>
@@ -86,7 +75,7 @@
         <div class="logo">SAB</div>
         <div>
           <div style="font-weight:800">SAB Holdings</div>
-          <div style="font-size:12px;color:var(--muted)">Multi-brand F&amp;B group — Egypt &amp; KSA</div>
+          <div style="font-size:12px;color:var(--muted)">Multi-brand F&B group — Egypt & KSA</div>
         </div>
       </div>
       <nav>
@@ -103,68 +92,25 @@
         <div class="hero-card">
           <div class="eyebrow">Since 2007</div>
           <h1>SAB Holdings — crafting memorable dining experiences at scale</h1>
-          <p class="lead">We create, scale and manage diverse food &amp; beverage brands that deliver exceptional customer experiences across Egypt and the Kingdom of Saudi Arabia. Our portfolio includes fast-casual street food concepts, seasonal hospitality experiences and modern dessert concepts.</p>
-
+          <p class="lead">We create, scale and manage diverse food & beverage brands that deliver exceptional customer experiences across Egypt and the Kingdom of Saudi Arabia.</p>
           <div class="stats">
             <div class="stat"><b>48+</b><span class="muted">Stores</span></div>
             <div class="stat"><b>2,000+</b><span class="muted">Employees</span></div>
             <div class="stat"><b>5+</b><span class="muted">Brands</span></div>
           </div>
-
-          <div style="margin-top:20px;display:flex;gap:12px;align-items:center">
-            <a href="#portfolio" class="pill">Explore portfolio</a>
-            <a href="#contact" class="inline">contact@sabholding.co</a>
-          </div>
-        </div>
-
-        <div style="display:flex;flex-direction:column;gap:14px">
-          <div class="hero-card" style="flex:1;display:flex;flex-direction:column;justify-content:space-between">
-            <div>
-              <h3 style="margin:0">Vision &amp; Mission</h3>
-              <p class="muted" style="margin-top:8px">To become the leading multi-brand F&amp;B powerhouse in the MENA region — shaping dining experiences that inspire communities and set new benchmarks in quality, innovation, and growth.</p>
-            </div>
-            <div style="display:flex;gap:10px;margin-top:16px">
-              <div style="flex:1">
-                <strong>Mission</strong>
-                <div class="muted" style="font-size:13px;margin-top:8px">Create, scale, and manage diverse F&amp;B brands that deliver exceptional customer experiences, combining operational excellence with a people-first culture.</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-card" style="display:flex;gap:12px;align-items:center">
-            <svg width="68" height="68" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-              <rect width="24" height="24" rx="6" fill="url(#g)" />
-              <defs>
-                <linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#0a84ff"/><stop offset="1" stop-color="#5ac8fa"/></linearGradient>
-              </defs>
-            </svg>
-            <div>
-              <div style="font-weight:700">HQ</div>
-              <div class="muted" style="font-size:13px">76 St. AbdelAziz Fahmy, Saint Fatima, Cairo, Egypt</div>
-            </div>
-          </div>
         </div>
       </section>
 
-      <section id="about">
+      <section id="about" style="background:url('assets/images/about-banner.jpg') center/cover no-repeat;border-radius:24px;overflow:hidden;padding:36px;">
         <div class="hero-card">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <h2 style="margin:0">About SAB Holdings</h2>
-              <p class="muted" style="margin-top:8px">Founded in 2007, SAB Holdings grew from a single F&amp;B concept into a diversified holding company with expertise in creating and scaling restaurant and retail brands across Egypt and KSA. We combine branding, operations, supply chain and marketing to deliver consistent growth.</p>
-            </div>
-            <div style="text-align:right">
-              <div class="muted" style="font-size:12px">Founded</div>
-              <div style="font-weight:800">2007</div>
-            </div>
-          </div>
-
-          <div style="margin-top:18px" class="grid-2">
+          <h2>About SAB Holdings</h2>
+          <p class="lead">Founded in 2007, SAB Holdings grew from a single F&B concept into a diversified holding company with expertise in creating and scaling restaurant and retail brands across Egypt and KSA. We combine branding, operations, supply chain and marketing to deliver consistent growth.</p>
+          <div class="grid-2" style="margin-top:18px">
             <div>
               <h3>Why SAB?</h3>
               <ul style="color:var(--muted);line-height:1.8">
-                <li>Proven track record: 18+ years in F&amp;B with multiple successful brands.</li>
-                <li>Scalable foodprint: 48+ stores and 2,000+ employees across Egypt &amp; KSA.</li>
+                <li>Proven track record: 18+ years in F&B with multiple successful brands.</li>
+                <li>Scalable footprint: 48+ stores and 2,000+ employees across Egypt & KSA.</li>
                 <li>Operational strength: end-to-end expertise in branding, operations and supply chain.</li>
                 <li>High growth potential: clear roadmap to expand regionally.</li>
               </ul>
@@ -183,109 +129,46 @@
       </section>
 
       <section id="brands">
-        <h2 style="margin-top:8px">Our Family of Brands</h2>
-        <p class="muted">A portfolio built on distinct identities — each concept is tailored to its audience while supported by SAB's central capabilities.</p>
-
-        <div class="brands" style="margin-top:16px">
-          <!-- Shawerma ElReem -->
-          <div class="brand-card">
-            <div style="width:64px;height:64px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;border:1px solid #f1f5f9">SE</div>
-            <div class="brand-info">
-              <h4>Shawerma ElReem</h4>
-              <p>Founded 2007 — one of Egypt's first shawerma chains, known for authentic Levantine flavors and accessibility. 16+ stores.</p>
-            </div>
-          </div>
-
-          <!-- Taghmisa -->
-          <div class="brand-card">
-            <div style="width:64px;height:64px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;border:1px solid #f1f5f9">TG</div>
-            <div class="brand-info">
-              <h4>Taghmisa</h4>
-              <p>Premium Ramadan pop-up experience — Cairo’s most premium Ramadan destination for nine consecutive years.</p>
-            </div>
-          </div>
-
-          <!-- Kufta -->
-          <div class="brand-card">
-            <div style="width:64px;height:64px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;border:1px solid #f1f5f9">KF</div>
-            <div class="brand-info">
-              <h4>Kufta</h4>
-              <p>Launched 2023 — modern take on Egyptian kufta and hawawshi; designed for Gen Z and nostalgic millennials.</p>
-            </div>
-          </div>
-
-          <!-- Crepe 2000 -->
-          <div class="brand-card">
-            <div style="width:64px;height:64px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;border:1px solid #f1f5f9">C2</div>
-            <div class="brand-info">
-              <h4>Crepe 2000</h4>
-              <p>Modern crepe house — premium street comfort reviving 2000s crepe culture. Founded March 18, 2025.</p>
-            </div>
-          </div>
-
-          <!-- Lil Kitchen -->
-          <div class="brand-card">
-            <div style="width:64px;height:64px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;border:1px solid #f1f5f9">LK</div>
-            <div class="brand-info">
-              <h4>Lil Kitchen</h4>
-              <p>Urban fried-chicken sandwich brand blending Nashville-inspired flavors with homemade bread and bold sauces.</p>
-            </div>
-          </div>
+        <h2>Our Family of Brands</h2>
+        <div class="brands">
+          <div class="brand-card"><img src="assets/images/brand-shawerma.jpg" alt="Shawerma ElReem" /><div class="brand-info"><h4>Shawerma ElReem</h4><p>Founded 2007 — Egypt's first shawerma chain, known for authentic Levantine flavors.</p></div></div>
+          <div class="brand-card"><img src="assets/images/brand-taghmisa.jpg" alt="Taghmisa" /><div class="brand-info"><h4>Taghmisa</h4><p>Premium Ramadan pop-up — Cairo’s most premium Ramadan destination for nine years.</p></div></div>
+          <div class="brand-card"><img src="assets/images/brand-kufta.jpg" alt="Kufta" /><div class="brand-info"><h4>Kufta</h4><p>Launched 2023 — modern Egyptian grills and hawawshi for the modern foodie.</p></div></div>
+          <div class="brand-card"><img src="assets/images/brand-crepe2000.jpg" alt="Crepe 2000" /><div class="brand-info"><h4>Crepe 2000</h4><p>Premium crepe house blending nostalgia and quality, founded in 2025.</p></div></div>
+          <div class="brand-card"><img src="assets/images/brand-lilkitchen.jpg" alt="Lil Kitchen" /><div class="brand-info"><h4>Lil Kitchen</h4><p>Urban fried chicken brand redefining Egyptian street food.</p></div></div>
         </div>
       </section>
 
-      <section id="portfolio">
+      <section id="portfolio" style="background:url('assets/images/portfolio-banner.jpg') center/cover no-repeat;border-radius:24px;overflow:hidden;padding:36px;">
         <div class="hero-card">
-          <h2 style="margin:0">Portfolio Overview</h2>
-          <p class="muted" style="margin-top:8px">Our portfolio spans quick-service concepts, premium seasonal experiences and fast-casual formats. We support brands with centralized ops, supply chain, marketing and creative services to scale efficiently.</p>
-
-          <div style="margin-top:18px" class="card-list">
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:12px;background:#fff;border:1px solid #f3f6f9">
-              <div>
-                <strong>Shawerma ElReem</strong>
-                <div class="muted" style="font-size:13px">Signature: shawerma sandwiches — consistent, affordable and culturally relevant.</div>
-              </div>
-              <div class="muted">16+ Stores</div>
-            </div>
-
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:12px;background:#fff;border:1px solid #f3f6f9">
-              <div>
-                <strong>Taghmisa</strong>
-                <div class="muted" style="font-size:13px">Premium Ramadan pop-up with live entertainment and immersive design.</div>
-              </div>
-              <div class="muted">Seasonal</div>
-            </div>
-
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:12px;background:#fff;border:1px solid #f3f6f9">
-              <div>
-                <strong>Kufta</strong>
-                <div class="muted" style="font-size:13px">Reimagined kufta &amp; hawawshi for fast service and modern presentation.</div>
-              </div>
-              <div class="muted">33+ Stores</div>
-            </div>
-          </div>
+          <h2>Portfolio Overview</h2>
+          <p class="lead">Our portfolio spans quick-service concepts, premium seasonal experiences and fast-casual formats. We support brands with centralized ops, supply chain, marketing and creative services to scale efficiently.</p>
+          <ul style="color:var(--muted);line-height:1.8;margin-top:16px">
+            <li><strong>Shawerma ElReem</strong> — Signature shawerma sandwiches: consistent, affordable, culturally relevant.</li>
+            <li><strong>Taghmisa</strong> — Premium Ramadan experience blending authentic design and entertainment.</li>
+            <li><strong>Kufta</strong> — Reviving classic Egyptian street flavors with a modern twist.</li>
+            <li><strong>Crepe 2000</strong> — Reimagining nostalgic 2000s crepe culture for today's audience.</li>
+            <li><strong>Lil Kitchen</strong> — Nashville-inspired crispy chicken and urban casual dining.</li>
+          </ul>
         </div>
       </section>
 
-      <section id="contact">
+      <section id="contact" style="background:url('assets/images/contact-banner.jpg') center/cover no-repeat;border-radius:24px;overflow:hidden;padding:36px;">
         <div class="hero-card">
-          <h2>Contact &amp; Corporate</h2>
-          <p class="muted">For partnerships, investment inquiries or brand opportunities reach out to our corporate team.</p>
-
+          <h2>Contact Us</h2>
+          <p class="lead">For partnerships, investment inquiries or brand opportunities reach out to our corporate team.</p>
           <div class="grid-2" style="margin-top:12px">
             <div class="contact">
-              <div class="row"><strong>Email</strong><div class="muted">contact@sabholding.co</div></div>
-              <div class="row"><strong>Phone</strong><div class="muted">T: +20 2226 445 308</div></div>
-              <div class="row"><strong>Address</strong><div class="muted">76 St. AbdelAziz Fahmy, Saint Fatima, Cairo, Egypt</div></div>
+              <div class="row"><strong>Email:</strong><span class="muted">contact@sabholding.co</span></div>
+              <div class="row"><strong>Phone:</strong><span class="muted">T: +20 2226 445 308</span></div>
+              <div class="row"><strong>Address:</strong><span class="muted">76 St. AbdelAziz Fahmy, Saint Fatima, Cairo, Egypt</span></div>
             </div>
             <div>
-              <h4 style="margin:0">Get in touch</h4>
-              <p class="muted" style="font-size:13px;margin-top:8px">Use the form below to send a message — this is a demo placeholder form that will send an email when connected to an API.</p>
-
+              <h4 style="margin:0">Send a Message</h4>
               <form style="margin-top:12px;display:flex;flex-direction:column;gap:8px;" onsubmit="event.preventDefault();alert('Demo: form submitted — connect to backend to send.')">
-                <input required placeholder="Full name" style="padding:12px;border-radius:10px;border:1px solid #eef2f6" />
-                <input required type="email" placeholder="Email" style="padding:12px;border-radius:10px;border:1px solid #eef2f6" />
-                <textarea required placeholder="Message" style="padding:12px;border-radius:10px;border:1px solid #eef2f6" rows="4"></textarea>
+                <input required placeholder="Full name" />
+                <input required type="email" placeholder="Email" />
+                <textarea required placeholder="Message" rows="4"></textarea>
                 <div style="display:flex;gap:8px;align-items:center">
                   <button class="cta" type="submit">Send message</button>
                   <button type="reset" style="padding:10px 14px;border-radius:10px;border:1px solid #eef2f6;background:white">Reset</button>
@@ -300,27 +183,12 @@
         <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
           <div>
             <strong>SAB Holdings</strong>
-            <div class="muted" style="font-size:13px">Creating, scaling &amp; managing multi-brand F&amp;B experiences across Egypt &amp; KSA.</div>
+            <div class="muted" style="font-size:13px">Creating, scaling & managing multi-brand F&B experiences across Egypt & KSA.</div>
           </div>
           <div class="muted" style="font-size:13px">© SAB Holdings — All rights reserved • contact@sabholding.co</div>
         </div>
       </footer>
-
     </main>
   </div>
-
-  <script>
-    // Small UX: smooth scroll for anchors
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',e=>{
-        const href=a.getAttribute('href');
-        if(href.length>1){
-          e.preventDefault();
-          const el=document.querySelector(href);
-          if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
-        }
-      })
-    })
-  </script>
 </body>
 </html>
